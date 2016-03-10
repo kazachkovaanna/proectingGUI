@@ -1,0 +1,6 @@
+.main {
+	-fx-background-image: url(../background.jpg);
+	-fx-background-position: left-top;
+	-fx-background-repeat: no-repeat;
+	-fx-background-size: cover;
+}

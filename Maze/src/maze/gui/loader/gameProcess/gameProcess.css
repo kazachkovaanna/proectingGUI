@@ -1,0 +1,7 @@
+//#gameWindow {
+//	-fx-width: 100%;
+//}
+.pauseBox{
+    -fx-background-color: #2f4f4f;
+    -fx-border-color: #2e8b57;
+}

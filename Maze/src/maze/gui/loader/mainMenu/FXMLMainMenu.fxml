@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="mainMenu" prefHeight="768.0" prefWidth="1366.0" styleClass="main" stylesheets="@main.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="maze.gui.controllers.FXMLMainMenuController">
+   <children>
+      <VBox alignment="CENTER_LEFT" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
+         <children>
+            <Button fx:id="selectLevel" minWidth="150.0" mnemonicParsing="false" onAction="#handleLevelButtonAction" text="Выбор уровня">
+               <VBox.margin>
+                  <Insets bottom="25.0" left="40.0" />
+               </VBox.margin>
+            </Button>
+            <Button minWidth="150.0" mnemonicParsing="false" onAction="#handleEditorButtonAction" text="Редактор уровней">
+               <VBox.margin>
+                  <Insets bottom="25.0" left="40.0" />
+               </VBox.margin>
+            </Button>
+            <Button minWidth="150.0" mnemonicParsing="false" onAction="#handlePlayerButtonAction" text="Выбор игрока">
+               <VBox.margin>
+                  <Insets bottom="25.0" left="40.0" />
+               </VBox.margin>
+            </Button>
+            <Button minWidth="150.0" mnemonicParsing="false" onAction="#handleSettingsButtonAction" text="Настройки">
+               <VBox.margin>
+                  <Insets bottom="25.0" left="40.0" />
+               </VBox.margin>
+            </Button>
+            <Button minWidth="150.0" mnemonicParsing="false" text="Выход">
+               <VBox.margin>
+                  <Insets bottom="75.0" left="40.0" />
+               </VBox.margin>
+            </Button>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
