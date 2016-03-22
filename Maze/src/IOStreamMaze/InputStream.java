@@ -40,7 +40,9 @@ public class InputStream {
                     readSettings(iStream);
                     break;
             }
+            iStream.closeEntry();
         }
+        iStream.close();
         return maze;
     }
     
