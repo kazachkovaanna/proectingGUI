@@ -67,23 +67,25 @@ public class InputStream {
         maze.setHight(h);
         for (int i = 0; i < w; i++)
             for (int j = 0; j < h; j++)
-                if (scanner.hasNext()) maze.set(i, j, scanner.nextBoolean());
+                if (scanner.hasNext()) maze.set(i, j, scanner.nextByte() == 1);
                 else throw new IOException("File incorrect");
     }
     
     private static void readSettings(ZipInputStream in) {
         Scanner scanner = new Scanner(in);
         while (scanner.hasNext()) {
-            scanner.nextLine();
-            String param[] = scanner.nextLine().split("=x;");
+            String input = scanner.nextLine();
+            String []param = input.split("=");
             switch(param[0]) {
                 case "start":
-                    maze.setStartX(Integer.parseInt(param[1]));
-                    maze.setStartY(Integer.parseInt(param[2]));
+                    param = param[1].split("x");
+                    maze.setStartX(Integer.parseInt(param[0]));
+                    maze.setStartY(Integer.parseInt(param[1]));
                     break;
                 case "finish":
-                    maze.setFinishX(Integer.parseInt(param[1]));
-                    maze.setFinishY(Integer.parseInt(param[2]));
+                    param = param[1].split("x");
+                    maze.setFinishX(Integer.parseInt(param[0]));
+                    maze.setFinishY(Integer.parseInt(param[1]));
                     break;
             }
         }

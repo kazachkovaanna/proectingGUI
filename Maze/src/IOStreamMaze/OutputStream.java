@@ -32,16 +32,27 @@ public class OutputStream {
         
         ZipEntry entry = new ZipEntry("maze.cfg");
         zout.putNextEntry(entry);
-        for (int i = 0; i < maze.getWeight(); i++)
-            for (int j = 0; j < maze.getHight(); j++)
+        Integer weight = maze.getWeight(),
+            height = maze.getHight();
+        
+        zout.write(weight.toString().getBytes());
+        zout.write("\n".getBytes());
+        zout.write(height.toString().getBytes());
+        zout.write("\n".getBytes());
+        for (int i = 0; i < maze.getWeight(); i++) {
+            for (int j = 0; j < maze.getHight(); j++) {
                 if (maze.isEmpty(i, j)) zout.write('0');
                 else zout.write('1');
+                zout.write(' ');
+            }
+            zout.write("\n".getBytes());
+        }
         zout.closeEntry();
         
         entry = new ZipEntry("settings.cfg");
         zout.putNextEntry(entry);
-        zout.write(("start="+maze.getStartX()+"x"+maze.getStartY()).getBytes());
-        zout.write(("start="+maze.getFinishX()+"x"+maze.getFinishY()).getBytes());
+        zout.write(("start="+maze.getStartX()+"x"+maze.getStartY()+"\n").getBytes());
+        zout.write(("finish="+maze.getFinishX()+"x"+maze.getFinishY()+"\n").getBytes());
         zout.closeEntry();
         
         zout.close();
