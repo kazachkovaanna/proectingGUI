@@ -1,4 +1,4 @@
-
+package maze;
 public class Maze {
 	
 	public int weight;
@@ -11,7 +11,7 @@ public class Maze {
 	*
 	*/
 	public Maze(){
-		weight = hight = 100;
+		weight = hight = 10;
 		maze = new boolean[weight][hight];
 		for(int i=0; i<weight; i++){
 			for(int j=0; j<hight; j++){
@@ -102,7 +102,7 @@ public class Maze {
 			
 			maze = new boolean[newWeight][hight]; 
 			
-			for (int i=0; i<weight; i++){ 
+			for (int i=0; i<Integer.min(newWeight, weight); i++){ 
 				for(int j=0; j<hight; j++){
 					maze[i][j] = exmaze[i][j];
 				}
@@ -135,18 +135,18 @@ public class Maze {
 		if (newHight < 0) System.out.println("Невозможно изменить ширину!");
 		else {
 			boolean[][] exmaze = maze;
-			maze = new boolean[newHight][hight]; 
+			maze = new boolean[weight][newHight]; 
 			
-			for (int i=0; i<weight; i++){ 
-				for(int j=0; j<hight; j++){
-					maze[i][j] = exmaze[i][j];
+			for (int i=0; i<Integer.min(newHight, hight); i++){ 
+				for(int j=0; j<weight; j++){
+					maze[j][i] = exmaze[j][i];
 				}
 			}
 			
 			if (newHight > hight) {
 				for (int i=hight; i<newHight; i++){ //
 					for(int j=0; j<weight; j++){
-						maze[i][j] = false;
+						maze[j][i] = false;
 					}
 				}
 			}
@@ -166,26 +166,45 @@ public class Maze {
 	 * 
 	 */
 	public void setStartX(int x){
-		if ((0 < x) & (x < weight)) startX = x;
+		if ((-1 < x) & (x < weight)) startX = x;
 		else System.out.println("Выход за пределы лабиринта");
 	}
 
 	public void setStartY(int y){
-		if ((0 < y) & (y < hight)) startY = y;
+		if ((-1 < y) & (y < hight)) startY = y;
 		else System.out.println("Выход за пределы лабиринта");
+	}
+        
+        /**координаты начала, их задание
+	 * 
+	 */
+	public int getStartX(){
+		return startX;
+	}
+
+	public int getStartY(){
+		return startY;
 	}
 	
 	/**координаты конца, их задание
 	 * 
 	 */
 	public void setFinishX(int x){
-		if ((0 < x) & (x < weight)) finishX = x;
+		if ((-1 < x) & (x < weight)) finishX = x;
 		else System.out.println("Выход за пределы лабиринта");
 	}
 
 	public void setFinishY(int y){
-		if ((0 < y) & (y < hight)) finishY = y;
+		if ((-1 < y) & (y < hight)) finishY = y;
 		else System.out.println("Выход за пределы лабиринта");
+	}
+        
+        public int getFinishX(){
+		return finishX;
+	}
+
+	public int getFinishY(){
+		return finishY;
 	}
 	
 }
