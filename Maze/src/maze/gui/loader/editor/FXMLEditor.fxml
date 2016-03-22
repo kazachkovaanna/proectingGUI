@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.canvas.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
@@ -9,7 +10,11 @@
 <AnchorPane id="AnchorPane" prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="maze.gui.controllers.FXMLEditorController">
    <children>
       <Button layoutX="14.0" layoutY="22.0" mnemonicParsing="false" onAction="#handleBackButtonAction" text="Назад" />
-      <Button layoutX="1278.0" layoutY="22.0" mnemonicParsing="false" text="Сохранить" />
+      <Button layoutX="1278.0" layoutY="22.0" mnemonicParsing="false" onAction="#handleSaveButtonAction" text="Сохранить" />
       <Label layoutX="633.0" layoutY="26.0" text="Редактор уровней" />
+      <Canvas fx:id="editArea" height="768.0" width="1366.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="80.0" />
+      <Button layoutX="1159.0" layoutY="22.0" mnemonicParsing="false" onAction="#handleLoadButtonAction" prefHeight="25.0" prefWidth="94.0" text="Загрузить" />
+      <Button layoutX="874.0" layoutY="22.0" mnemonicParsing="false" onAction="#handleNewWidthAction" text="Ширина..." />
+      <Button layoutX="954.0" layoutY="22.0" mnemonicParsing="false" onAction="#handleNewHeightAction" text="Высота..." />
    </children>
 </AnchorPane>

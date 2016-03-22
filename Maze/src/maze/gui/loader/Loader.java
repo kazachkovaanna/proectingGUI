@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import maze.Main;
+import maze.gui.controllers.FXMLEditorController;
 import maze.gui.controllers.FXMLGameProcessController;
 
 /**
@@ -20,6 +21,7 @@ public class Loader {
     private Scene levelChoice;      //Выбор уровня
     private Scene gameLevel;
     private FXMLGameProcessController gameController;
+    private FXMLEditorController editorController;
     private Scene playerChoice;
     private Scene statistics;
     private Scene editor;
@@ -101,11 +103,14 @@ public class Loader {
     
     public void loadEditor() throws IOException{
         if(editor == null){
-            Parent root = fxmlLoader.load(getClass().getResource("editor/FXMLEditor.fxml"));        
+            fxmlLoader = new FXMLLoader(getClass().getResource("editor/FXMLEditor.fxml"));
+            Parent root = fxmlLoader.load();
+            editorController = fxmlLoader.getController();
             Scene scene = new Scene(root);
             scene.setRoot(root);
             stage.show();
             editor = scene;
+            editorController.setScene(scene);
         }
         stage.setScene(editor);
     }
