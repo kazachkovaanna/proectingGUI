@@ -65,17 +65,17 @@ public class EditHandler implements EventHandler<MouseEvent>{
                 if(!(x== maze.getFinishX() &&y == maze.getFinishY() )&& ! ( x== maze.getStartX() && y== maze.getStartY()))
                 maze.set(x, y, maze.isEmpty(x, y));
             }
-            drawer.Draw2D(canvas, maze, true);
+            drawer.Draw2D(canvas, maze, false);
         }
             
     }
     public void setMaze(Maze mz){
         maze = mz;
-        drawer.Draw2D(canvas, maze, true);
+        drawer.Draw2D(canvas, maze, false);
     }
     
     public void redraw(){
-        drawer.Draw2D(canvas, maze, true);
+        drawer.Draw2D(canvas, maze, false);
     }
     
 }
