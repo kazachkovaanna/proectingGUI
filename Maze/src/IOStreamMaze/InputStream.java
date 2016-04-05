@@ -65,6 +65,8 @@ public class InputStream {
         
         maze.setWeight(w);
         maze.setHight(h);
+        Maze.Point p;
+        p = new Maze.Point(0, 0);
         for (int i = 0; i < w; i++)
             for (int j = 0; j < h; j++)
                 if (scanner.hasNext()) maze.set(i, j, scanner.nextByte() == 1);
