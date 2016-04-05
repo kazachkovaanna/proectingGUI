@@ -6,72 +6,8 @@ public class Maze {
     private Integer weight;
     private Integer hight;
     private Boolean maze[][];
-    private Integer startX, startY;
-    private Integer finishX, finishY;
-
-    public class Point {
-        private Integer X;
-        private Integer Y;
-
-        /**
-         *Конструктор инициализирует все поля класса значениями 0
-         */
-        public Point() {
-            X = 0;
-            Y = 0;
-        }
-
-        /**
-         * Коструктор инициализирует значение полей заданными параметрами
-         * @param x - задает значение поля X
-         * @param y - задеат значение поля Y
-         */
-        public Point(final Integer x, final Integer y) {
-            X = x;
-            Y = y;
-        }
-
-        /**
-         * Конструктор копирования инициализирует значения полей из копии
-         * @param ob - оригинал объекта для копирования
-         */
-        public Point(final Point ob){
-            X = ob.X;
-            Y = ob.Y;
-        }
-
-        /**
-         * Задает параметр X
-         * @param x - координата X
-         */
-        public void setX(final Integer x) {
-            X = x;
-        }
-
-        /**
-         * Задает параметр Y
-         * @param y - координата Y
-         */
-        public void setY(final Integer y) {
-            Y = y;
-        }
-
-        /**
-         * Возвращает координату X
-         * @return значение координаты X
-         */
-        public Integer getX() {
-            return X;
-        }
-
-        /**
-         * Возвращает координату Y
-         * @return значение координаты Y
-         */
-        public Integer getY() {
-            return Y;
-        }
-    }
+    private Point start = new Point();
+    private Point finish = new Point();
 
     /**
      * Коструктор поумолчанию задает ширину и высоту равными 10 и инициализирует лабиринт
@@ -89,10 +25,10 @@ public class Maze {
 
     /**
     * Коструктор задает ширину и высоту, а также инициализирует лабиринт
-     * @param w - ширина лабиринта
-     * @param h - высота лабиринта
+     * @param w ширина лабиринта
+     * @param h высота лабиринта
     */
-    public Maze(Integer w, Integer h){
+    public Maze(final Integer w, final Integer h){
         weight = w;
         hight = h;
         maze = new Boolean[weight][hight];
@@ -105,73 +41,67 @@ public class Maze {
 
     /**
      * Проверка на наличие стенки в лабиринте с координатами x и y
-     * @param x - значение клетки по ширине
-     * @param y - значение клетки по высоте
+     * @param p координаты ячейки
      * @return false, если стенка, иначе true
     */
-    public Boolean isEmpty(Integer x, Integer y){
-        return !maze[x][y];
+    public Boolean isEmpty(final Point p){
+        return !maze[p.getX()][p.getY()];
     }
 
     /**
      * Задание значения ячейке с заданными координатами
-     * @param x - координата по ширине
-     * @param y - координата по высоте
-     * @param maz - false, если стенка, иначе true
+     * @param p координаты ячейки
+     * @param maz false, если стенка, иначе true
      */
-    public void set(Integer x, Integer y, Boolean maz){
-        maze[x][y] = maz;	
+    public void set(final Point p, final Boolean maz){
+        maze[p.getX()][p.getY()] = maz;	
     }
 
     /**
      * Определение возможности идти налево из заданной ячейки
-     * @param x - значение по ширине
-     * @param y - значение по высоте
+     * @param p координаты ячейки
      * @return значение true, если маневр возможен, иначе false
      */
-    public Boolean left(Integer x, Integer y){
-        if (x - 1 < 0) return false;
-        return isEmpty(x - 1, y);
+    public Boolean left(final Point p){
+        if (p.getX() - 1 < 0) return false;
+        return isEmpty(p);
     }
 
     /**
      * Определение возможности идти направо из заданной ячейки
-     * @param x - значение по ширине
-     * @param y - значение по высоте
+     * @param p координаты ячейки
      * @return значение true, если маневр возможен, иначе false
      */
-    public Boolean right(Integer x, Integer y){
-        if (x + 1 > weight) return false;
-        return isEmpty(x + 1, y);
+    public Boolean right(final Point p){
+        if (p.getX() + 1 > weight) return false;
+        return isEmpty(p);
     }
 
     /**
      * Определение возможности идти вверх из заданной ячейки
-     * @param x - значение по ширине
-     * @param y - значение по высоте
+     * @param p координаты ячейки
      * @return значение true, если маневр возможен, иначе false
      */
-    public Boolean top(Integer x, Integer y){
-        if (y + 1 > hight) return false;
-        return isEmpty(x, y + 1);
+    public Boolean top(final Point p){
+        if (p.getY() + 1 > hight) return false;
+        return isEmpty(p);
     }
 
     /**
      * Определение возможности идти вниз из заданной ячейки
-     * @param x - значение по ширине
-     * @param y - значение по высоте
+     * @param p координаты ячейки
      * @return значение true, если маневр возможен, иначе false
      */
-    public Boolean bottom(Integer x, Integer y){
-        if (y - 1 < 0) return false;
-        return isEmpty(x, y - 1);
+    public Boolean bottom(final Point p){
+        if (p.getY() - 1 < 0) return false;
+        return isEmpty(p);
     }
 
     /**
      * Изменение ширины лабиринта
-     * @param newWeight - новая ширина лабиринта
+     * @param newWeight новая ширина лабиринта
      */
-    public void setWeight(Integer newWeight){
+    public void setWeight(final Integer newWeight){
         if (newWeight < 0) {
             System.out.println("Невозможно изменить ширину!");
             return;
@@ -207,9 +137,9 @@ public class Maze {
 
     /**
      * Изменение высота лабиринта 
-     * @param newHight - новая высота лабиринта
+     * @param newHight новая высота лабиринта
      */
-    public void setHight(Integer newHight){
+    public void setHight(final Integer newHight){
         if (newHight < 0) {
             System.out.println("Невозможно изменить ширину!");
             return;
@@ -236,7 +166,7 @@ public class Maze {
 
     /**
      * Возврат высоту лабиринта
-     * @return - высот алабиринта
+     * @return высоты алабиринта
      */
     public Integer getHight(){
         return hight;
@@ -244,19 +174,19 @@ public class Maze {
 
     /**
      * Задание координаты стартовой точки по x
-     * @param x - координата точки по ширине
+     * @param x координата точки по ширине
      */
     public void setStartX(final Integer x){
-        if ((-1 < x) & (x < weight)) startX = x;
+        if ((-1 < x) & (x < weight)) start.setX(x);
         else System.out.println("Выход за пределы лабиринта");
     }
 
     /**
      * Задание координаты стартовой точки по y
-     * @param y - координата по высоте
+     * @param y координата по высоте
      */
     public void setStartY(final Integer y){
-        if ((-1 < y) & (y < hight)) startY = y;
+        if ((-1 < y) & (y < hight)) start.setY(y);
         else System.out.println("Выход за пределы лабиринта");
     }
 
@@ -265,32 +195,50 @@ public class Maze {
      * @return 
      */
     public Integer getStartX(){
-        return startX;
+        return start.getX();
     }
 
     public Integer getStartY(){
-        return startY;
+        return start.getY();
+    }
+    
+    public void setStart(final Point Start) {
+        //проверка
+        start = new Point(Start);
+    }
+    
+    public Point getStart() {
+        return start;
     }
 
     /**координаты конца, их задание
      * 
      */
-    public void setFinishX(Integer x){
-        if ((-1 < x) & (x < weight)) finishX = x;
+    public void setFinishX(final Integer x){
+        if ((-1 < x) & (x < weight)) finish.setX(x);
         else System.out.println("Выход за пределы лабиринта");
     }
 
-    public void setFinishY(Integer y){
-        if ((-1 < y) & (y < hight)) finishY = y;
+    public void setFinishY(final Integer y){
+        if ((-1 < y) & (y < hight)) finish.setY(y);
         else System.out.println("Выход за пределы лабиринта");
+    }
+    
+    public void setFinish(final Point f) {
+        //проверка
+        finish = new Point(f);
+    }
+    
+    public Point getFinish() {
+        return finish;
     }
 
     public Integer getFinishX(){
-        return finishX;
+        return finish.getX();
     }
 
     public Integer getFinishY(){
-        return finishY;
+        return finish.getY();
     }
 
     /**
@@ -299,13 +247,60 @@ public class Maze {
      * @return список координат клеток одного из наикратчайший путей, 
      * null если пути не существует или запрос делается из конечной точки.
      */
-    public List<Point> getPath(Point p) {
-        Integer length = Integer.MAX_VALUE;                 //длина наикратчайшего пути
-        
-        return null;
+    public List<Point> getPath(final Point p) {
+        List<Point> curr = new java.util.ArrayList<>();
+        List<Point> best = new java.util.ArrayList<>();
+        curr.add(p);
+        getPath(curr, best);
+        return best;
     }
     
-    private List<Point> getPath(Point p, Integer cLength, Integer mLength) {
-        return null;
+    private void getPath(List<Point> curr, List<Point> best) {
+        int currSize = curr.size();
+        int bestSize = best.size();
+        if (bestSize != 0 && currSize >= bestSize) return;
+        
+        Point point = curr.get(currSize - 1);
+        if (point.equals(getFinish())) {
+            best.clear();
+            best.addAll(curr);
+            return;
+        }
+        
+        Point pointLeft = new Point(point.getX() - 1, point.getY());
+        Point pointRight = new Point(point.getX() + 1, point.getY());
+        Point pointBot = new Point(point.getX(), point.getY() - 1);
+        Point pointTop = new Point(point.getX(), point.getY() + 1);
+        
+        for(Point p : curr) {
+            if (p.equals(pointLeft)) pointLeft = null;
+            if (p.equals(pointRight)) pointRight = null;
+            if (p.equals(pointTop)) pointTop = null;
+            if (p.equals(pointBot)) pointBot = null;
+        }
+        
+        if (null != pointLeft && left(point)) {
+            curr.add(pointLeft);
+            getPath(curr, best);
+            curr.remove(currSize);
+        }
+        
+        if (null != pointTop && top(point)) {
+            curr.add(pointTop);
+            getPath(curr, best);
+            curr.remove(currSize);
+        }
+        
+        if (null != pointRight && right(point)) {
+            curr.add(pointRight);
+            getPath(curr, best);
+            curr.remove(currSize);
+        }
+        
+        if (null != pointBot && bottom(point)) {
+            curr.add(pointBot);
+            getPath(curr, best);
+            curr.remove(currSize);
+        }
     }
 }
