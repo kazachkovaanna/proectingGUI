@@ -9,27 +9,27 @@
    <children>
       <VBox alignment="CENTER_LEFT" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
          <children>
-            <Button fx:id="selectLevel" minWidth="150.0" mnemonicParsing="false" onAction="#handleLevelButtonAction" text="Выбор уровня">
+            <Button fx:id="selectLevel" minWidth="170.0" mnemonicParsing="false" onAction="#handleLevelButtonAction" text="Выбор уровня">
                <VBox.margin>
                   <Insets bottom="25.0" left="40.0" />
                </VBox.margin>
             </Button>
-            <Button minWidth="150.0" mnemonicParsing="false" onAction="#handleEditorButtonAction" text="Редактор уровней">
+            <Button minWidth="170.0" mnemonicParsing="false" onAction="#handleEditorButtonAction" text="Редактор уровней">
                <VBox.margin>
                   <Insets bottom="25.0" left="40.0" />
                </VBox.margin>
             </Button>
-            <Button minWidth="150.0" mnemonicParsing="false" onAction="#handlePlayerButtonAction" text="Выбор игрока">
+            <Button minWidth="170.0" mnemonicParsing="false" onAction="#handlePlayerButtonAction" text="Выбор игрока">
                <VBox.margin>
                   <Insets bottom="25.0" left="40.0" />
                </VBox.margin>
             </Button>
-            <Button minWidth="150.0" mnemonicParsing="false" onAction="#handleSettingsButtonAction" text="Настройки">
+            <Button minWidth="170.0" mnemonicParsing="false" onAction="#handleSettingsButtonAction" text="Настройки">
                <VBox.margin>
                   <Insets bottom="25.0" left="40.0" />
                </VBox.margin>
             </Button>
-            <Button minWidth="150.0" mnemonicParsing="false" text="Выход">
+            <Button minWidth="170.0" mnemonicParsing="false" text="Выход">
                <VBox.margin>
                   <Insets bottom="75.0" left="40.0" />
                </VBox.margin>
