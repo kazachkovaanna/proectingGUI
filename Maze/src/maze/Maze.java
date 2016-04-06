@@ -51,10 +51,10 @@ public class Maze {
     /**
      * Задание значения ячейке с заданными координатами
      * @param p координаты ячейки
-     * @param maz false, если стенка, иначе true
+     * @param isNotWall false, если стенка, иначе true
      */
-    public void set(final Point p, final Boolean maz){
-        maze[p.getX()][p.getY()] = maz;	
+    public void set(final Point p, final Boolean isNotWall){
+        maze[p.getX()][p.getY()] = isNotWall;	
     }
 
     /**
