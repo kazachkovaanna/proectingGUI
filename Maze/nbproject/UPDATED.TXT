@@ -1,8 +1,14 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =================================
 Project Maze build script updated
 =================================
+=======
+=================================
+Project Maze build script updated
+=================================
+>>>>>>> origin/master
 =======
 =================================
 Project Maze build script updated
@@ -34,7 +40,11 @@ Remark: Files nbproject/jfx-impl_backup*.xml and this file nbproject/UPDATED.TXT
 are not used when building the project and can be freely deleted.
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+
+>>>>>>> origin/master
 =======
 
 >>>>>>> origin/master

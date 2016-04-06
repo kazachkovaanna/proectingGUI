@@ -11,13 +11,16 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" minHeight="480.0" minWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="maze.gui.controllers.FXMLEditorController">
+<AnchorPane id="AnchorPane" minHeight="600.0" minWidth="1024.0" stylesheets="@editor.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="maze.gui.controllers.FXMLEditorController">
    <children>
       <Button layoutX="1278.0" layoutY="22.0" mnemonicParsing="false" onAction="#handleSaveButtonAction" prefHeight="25.0" text="Сохранить" textAlignment="CENTER" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="22.0" />
-      <Label layoutX="96.0" layoutY="22.0" text="Редактор уровней" textAlignment="CENTER" AnchorPane.topAnchor="22.0">
+      <Label layoutX="96.0" layoutY="22.0" prefHeight="17.0" prefWidth="197.0" text="Редактор уровней" textAlignment="CENTER" AnchorPane.topAnchor="22.0">
          <padding>
             <Insets right="20.0" />
-         </padding></Label>
+         </padding>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets></Label>
       <Canvas fx:id="editArea" height="395.0" width="630.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="80.0">
          <effect>
             <Blend />

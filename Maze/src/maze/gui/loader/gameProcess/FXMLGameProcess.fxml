@@ -7,7 +7,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="768.0" maxWidth="1366.0" minHeight="768.0" minWidth="1366.0" prefHeight="768.0" prefWidth="1366.0" stylesheets="@gameProcess.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="maze.gui.controllers.FXMLGameProcessController">
+<AnchorPane minHeight="600.0" minWidth="1024.0" stylesheets="@gameProcess.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="maze.gui.controllers.FXMLGameProcessController">
    <children>
       <MeshView AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
       <VBox id="pauseBox" fx:id="pauseBox" alignment="CENTER" prefHeight="200.0" prefWidth="200.0" styleClass="pauseBox" stylesheets="@gameProcess.css" visible="false" AnchorPane.bottomAnchor="500.0" AnchorPane.leftAnchor="500.0" AnchorPane.rightAnchor="500.0" AnchorPane.topAnchor="500.0">

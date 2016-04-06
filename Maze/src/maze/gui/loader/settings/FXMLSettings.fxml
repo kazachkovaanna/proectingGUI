@@ -22,7 +22,7 @@
       </HBox>
    </bottom>
    <center>
-      <VBox>
+      <VBox minHeight="600.0" minWidth="1024.0" stylesheets="@setings.css">
          <children>
             <Label text="Выберите язык:" />
             <ComboBox prefWidth="150.0" />

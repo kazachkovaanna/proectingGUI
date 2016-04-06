@@ -6,7 +6,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" minHeight="480.0" minWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="maze.gui.controllers.FXMLLevelChoiceController">
+<AnchorPane id="AnchorPane" minHeight="600.0" minWidth="1024.0" stylesheets="@levelChoice.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="maze.gui.controllers.FXMLLevelChoiceController">
    <children>
       <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleBackButtonAction" text="Назад" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="18.0" />
       <Button layoutX="37.0" layoutY="71.0" mnemonicParsing="false" onAction="#handleLevelButtonAction" text="Уровень 1" AnchorPane.leftAnchor="37.0" AnchorPane.topAnchor="71.0" />

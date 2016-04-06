@@ -6,7 +6,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane id="main" minHeight="480.0" minWidth="640.0" styleClass="main" stylesheets="@choicePlayer.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="maze.gui.controllers.FXMLPlayerChoiceController">
+<BorderPane id="main" minHeight="600.0" minWidth="1024.0" styleClass="main" stylesheets="@choicePlayer.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="maze.gui.controllers.FXMLPlayerChoiceController">
    <bottom>
       <HBox alignment="TOP_RIGHT" prefHeight="24.0" prefWidth="492.0" BorderPane.alignment="TOP_RIGHT">
          <children>
