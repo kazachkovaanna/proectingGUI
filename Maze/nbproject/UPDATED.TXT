@@ -1,6 +1,24 @@
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
 =================================
 Project Maze build script updated
 =================================
+=======
+=================================
+Project Maze build script updated
+=================================
+>>>>>>> origin/master
+=======
+=================================
+Project Maze build script updated
+=================================
+>>>>>>> origin/master
+=======
+=================================
+Project Maze build script updated
+=================================
+>>>>>>> origin/master
 
 Project build script file jfx-impl.xml in nbproject sub-directory has not been recognized
 as compliant with this version of NetBeans JavaFX support module. To ensure correct
@@ -20,4 +38,16 @@ javafx.disable.autoupdate.notification=true
 
 Remark: Files nbproject/jfx-impl_backup*.xml and this file nbproject/UPDATED.TXT
 are not used when building the project and can be freely deleted.
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+
+>>>>>>> origin/master
+=======
+
+>>>>>>> origin/master
+=======
+
+>>>>>>> origin/master

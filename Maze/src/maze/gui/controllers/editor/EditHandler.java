@@ -10,6 +10,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import maze.Maze;
+import maze.Point;
 import maze.gui.controllers.FXMLEditorController;
 
 /**
@@ -41,11 +42,15 @@ public class EditHandler implements EventHandler<MouseEvent>{
         {
             double w = canvas.getWidth()/maze.getWeight();  //ширина ячейки
             double h = canvas.getHeight()/maze.getHight();  //высота ячейки
+            
             int x = (int) (eventX/w);
             int y = (int) (eventY/h) - 1;
+            Point p = new Point();
+            p.setX(x);
+            p.setY(y);
             //теперь известны координаты ячейки
             if(event.getButton()==MouseButton.SECONDARY){
-                if(maze.isEmpty(x, y)){
+                if(maze.isEmpty(p)){
                     if(!(x==maze.getFinishX() && y== maze.getFinishY())){
                         maze.setStartX(x);
                         maze.setStartY(y);
@@ -54,7 +59,7 @@ public class EditHandler implements EventHandler<MouseEvent>{
             
             }
             else if(event.getButton()==MouseButton.MIDDLE){
-                if(maze.isEmpty(x, y)){
+                if(maze.isEmpty(p)){
                     if(!(x==maze.getStartX() && y== maze.getStartY())){
                         maze.setFinishX(x);
                         maze.setFinishY(y);
@@ -63,7 +68,7 @@ public class EditHandler implements EventHandler<MouseEvent>{
             }
             else{
                 if(!(x== maze.getFinishX() &&y == maze.getFinishY() )&& ! ( x== maze.getStartX() && y== maze.getStartY()))
-                maze.set(x, y, maze.isEmpty(x, y));
+                maze.set(p, maze.isEmpty(p));
             }
             drawer.Draw2D(canvas, maze, false);
         }

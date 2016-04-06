@@ -1,20 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.canvas.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="maze.gui.controllers.FXMLEditorController">
+<AnchorPane id="AnchorPane" minHeight="600.0" minWidth="1024.0" stylesheets="@editor.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="maze.gui.controllers.FXMLEditorController">
    <children>
-      <Button layoutX="14.0" layoutY="22.0" mnemonicParsing="false" onAction="#handleBackButtonAction" text="Назад" />
-      <Button layoutX="1278.0" layoutY="22.0" mnemonicParsing="false" onAction="#handleSaveButtonAction" text="Сохранить" />
-      <Label layoutX="633.0" layoutY="26.0" text="Редактор уровней" />
-      <Canvas fx:id="editArea" height="768.0" width="1366.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="80.0" />
-      <Button layoutX="1159.0" layoutY="22.0" mnemonicParsing="false" onAction="#handleLoadButtonAction" prefHeight="25.0" prefWidth="94.0" text="Загрузить" />
-      <Button layoutX="874.0" layoutY="22.0" mnemonicParsing="false" onAction="#handleNewWidthAction" text="Ширина..." />
-      <Button layoutX="954.0" layoutY="22.0" mnemonicParsing="false" onAction="#handleNewHeightAction" text="Высота..." />
+      <Button layoutX="1278.0" layoutY="22.0" mnemonicParsing="false" onAction="#handleSaveButtonAction" prefHeight="25.0" text="Сохранить" textAlignment="CENTER" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="22.0" />
+      <Label layoutX="96.0" layoutY="22.0" prefHeight="17.0" prefWidth="197.0" text="Редактор уровней" textAlignment="CENTER" AnchorPane.topAnchor="22.0">
+         <padding>
+            <Insets right="20.0" />
+         </padding>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets></Label>
+      <Canvas fx:id="editArea" height="395.0" width="630.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="80.0">
+         <effect>
+            <Blend />
+         </effect></Canvas>
+      <Button layoutX="437.0" layoutY="22.0" mnemonicParsing="false" onAction="#handleLoadButtonAction" prefHeight="25.0" prefWidth="94.0" text="Загрузить" textAlignment="CENTER" AnchorPane.topAnchor="22.0">
+         <padding>
+            <Insets right="10.0" />
+         </padding></Button>
+      <Button layoutX="265.0" layoutY="22.0" mnemonicParsing="false" onAction="#handleNewWidthAction" prefHeight="25.0" text="Ширина..." textAlignment="CENTER" AnchorPane.topAnchor="22.0">
+         <padding>
+            <Insets right="10.0" />
+         </padding></Button>
+      <Button layoutX="352.0" layoutY="22.0" mnemonicParsing="false" onAction="#handleNewHeightAction" prefHeight="25.0" text="Высота..." textAlignment="CENTER" AnchorPane.topAnchor="22.0">
+         <padding>
+            <Insets right="10.0" />
+         </padding></Button>
+      <Button layoutX="21.0" layoutY="22.0" maxHeight="25.0" maxWidth="58.0" mnemonicParsing="false" onAction="#handleBackButtonAction" text="Назад" AnchorPane.leftAnchor="21.0" AnchorPane.topAnchor="22.0" />
    </children>
 </AnchorPane>

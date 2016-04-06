@@ -5,7 +5,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane prefHeight="768.0" prefWidth="1366.0" styleClass="main" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="maze.gui.controllers.FXMLSettingsController">
+<BorderPane minHeight="480.0" minWidth="640.0" styleClass="main" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="maze.gui.controllers.FXMLSettingsController">
    <bottom>
       <HBox alignment="TOP_RIGHT" BorderPane.alignment="TOP_RIGHT">
          <children>
@@ -22,7 +22,7 @@
       </HBox>
    </bottom>
    <center>
-      <VBox>
+      <VBox minHeight="600.0" minWidth="1024.0" stylesheets="@setings.css">
          <children>
             <Label text="Выберите язык:" />
             <ComboBox prefWidth="150.0" />

@@ -6,13 +6,13 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane id="main" prefHeight="768.0" prefWidth="1366.0" styleClass="main" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="maze.gui.controllers.FXMLPlayerChoiceController">
+<BorderPane id="main" minHeight="600.0" minWidth="1024.0" styleClass="main" stylesheets="@choicePlayer.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="maze.gui.controllers.FXMLPlayerChoiceController">
    <bottom>
-      <HBox alignment="TOP_RIGHT" BorderPane.alignment="TOP_RIGHT">
+      <HBox alignment="TOP_RIGHT" prefHeight="24.0" prefWidth="492.0" BorderPane.alignment="TOP_RIGHT">
          <children>
-            <Button alignment="CENTER" mnemonicParsing="false" onAction="#handleStatisticsButtonAction" text="Статистика">
+            <Button mnemonicParsing="false" text="Статистика">
                <HBox.margin>
-                  <Insets right="400.0" />
+                  <Insets right="20.0" />
                </HBox.margin>
             </Button>
             <Button defaultButton="true" mnemonicParsing="false" onAction="#handleOkButtonAction" prefWidth="100.0" text="Применить">
@@ -20,10 +20,10 @@
                   <Insets right="20.0" />
                </HBox.margin>
             </Button>
-            <Button cancelButton="true" mnemonicParsing="false" onAction="#handleCancelButtonAction" prefWidth="100.0" text="Отмена" />
+            <Button cancelButton="true" mnemonicParsing="false" onAction="#handleCancelButtonAction" prefWidth="100.0" text="Отмена" textAlignment="CENTER" />
          </children>
          <BorderPane.margin>
-            <Insets bottom="25.0" right="50.0" />
+            <Insets bottom="25.0" left="100.0" right="50.0" />
          </BorderPane.margin>
       </HBox>
    </bottom>
