@@ -24,6 +24,12 @@ public class EditHandler implements EventHandler<MouseEvent>{
     private ArrayList input;
     private Scene scene;
     private Maze maze;
+    private double canvasLX;
+    private double canvasLY;
+    private double canvasW;
+    private double canvasH;
+    
+    
     DrawMaze drawer;
     
     public EditHandler(FXMLEditorController controller, Canvas editArea, Scene sc, Maze mz){
@@ -33,18 +39,30 @@ public class EditHandler implements EventHandler<MouseEvent>{
         scene = sc;
         maze = mz;
         drawer = new DrawMazeImpl();
+        canvasLX = canvas.getLayoutX();
+        canvasLY = canvas.getLayoutY();
+        canvasH = canvas.getHeight();
+        canvasW = canvas.getWidth();
     }
     @Override
     public void handle(MouseEvent event) {
         double eventX = event.getX();
         double eventY = event.getY();
-        if(eventY > scene.getHeight()-canvas.getHeight())
+        
+        canvasLX = canvas.getLayoutX();
+        canvasLY = canvas.getLayoutY();
+        //if(eventY > scene.getHeight()-canvas.getHeight())
+        if(eventX>canvasLX && eventX < canvasLX+canvasW && eventY>canvasLY && eventY<canvasLY+canvasH)
         {
-            double w = canvas.getWidth()/maze.getWeight();  //ширина ячейки
-            double h = canvas.getHeight()/maze.getHight();  //высота ячейки
+            double w = canvasW/maze.getWeight();  //ширина ячейки
+            double h = canvasH/maze.getHight();  //высота ячейки
             
-            int x = (int) (eventX/w);
-            int y = (int) (eventY/h) - 1;
+            double xe = eventX - canvasLX;
+            xe/=w;
+            double ye =  eventY - canvasLY;
+            ye/=h;
+            int x = (int) xe;
+            int y = (int) ye;
             Point p = new Point();
             p.setX(x);
             p.setY(y);
@@ -70,17 +88,17 @@ public class EditHandler implements EventHandler<MouseEvent>{
                 if(!(x== maze.getFinishX() &&y == maze.getFinishY() )&& ! ( x== maze.getStartX() && y== maze.getStartY()))
                 maze.set(p, maze.isEmpty(p));
             }
-            drawer.Draw2D(canvas, maze, false);
+            drawer.Draw2D(canvas, maze, true);
         }
             
     }
     public void setMaze(Maze mz){
         maze = mz;
-        drawer.Draw2D(canvas, maze, false);
+        drawer.Draw2D(canvas, maze, true);
     }
     
     public void redraw(){
-        drawer.Draw2D(canvas, maze, false);
+        drawer.Draw2D(canvas, maze, true);
     }
     
 }
