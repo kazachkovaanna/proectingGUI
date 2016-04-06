@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 import maze.Maze;
+import maze.Point;
 
 /**
  *
@@ -39,9 +40,12 @@ public class OutputStream {
         zout.write("\n".getBytes());
         zout.write(height.toString().getBytes());
         zout.write("\n".getBytes());
+        Point p = new Point();
         for (int i = 0; i < maze.getWeight(); i++) {
             for (int j = 0; j < maze.getHight(); j++) {
-                if (maze.isEmpty(i, j)) zout.write('0');
+                p.setX(i);
+                p.setY(j);
+                if (maze.isEmpty(p)) zout.write('0');
                 else zout.write('1');
                 zout.write(' ');
             }

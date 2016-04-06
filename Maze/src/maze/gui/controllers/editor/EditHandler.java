@@ -41,6 +41,7 @@ public class EditHandler implements EventHandler<MouseEvent>{
         {
             double w = canvas.getWidth()/maze.getWeight();  //ширина ячейки
             double h = canvas.getHeight()/maze.getHight();  //высота ячейки
+            
             int x = (int) (eventX/w);
             int y = (int) (eventY/h) - 1;
             //теперь известны координаты ячейки
@@ -65,17 +66,17 @@ public class EditHandler implements EventHandler<MouseEvent>{
                 if(!(x== maze.getFinishX() &&y == maze.getFinishY() )&& ! ( x== maze.getStartX() && y== maze.getStartY()))
                 maze.set(x, y, maze.isEmpty(x, y));
             }
-            drawer.Draw2D(canvas, maze, true);
+            drawer.Draw2D(canvas, maze, false);
         }
             
     }
     public void setMaze(Maze mz){
         maze = mz;
-        drawer.Draw2D(canvas, maze, true);
+        drawer.Draw2D(canvas, maze, false);
     }
     
     public void redraw(){
-        drawer.Draw2D(canvas, maze, true);
+        drawer.Draw2D(canvas, maze, false);
     }
     
 }

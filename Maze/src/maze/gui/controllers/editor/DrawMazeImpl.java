@@ -4,6 +4,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import maze.Maze;
+import maze.Point;
 
 /**
  *
@@ -21,9 +22,12 @@ public class DrawMazeImpl implements DrawMaze{
         double height = fieldH/maze.getHight();
         double width = fieldW/maze.getWeight();
         GraphicsContext gc = field.getGraphicsContext2D();
+        Point p = new Point();
         for(int i = 0; i<maze.getWeight(); i++){
             for(int j = 0; j<maze.getHight(); j++){
-                if(maze.isEmpty(i, j)) gc.setFill(Color.BEIGE);
+                p.setX(i);
+                p.setY(j);
+                if(maze.isEmpty(p)) gc.setFill(Color.BEIGE);
                 else gc.setFill(Color.DARKRED);
                 gc.fillRect(width*i, height*j, width, height);  //рисует залитый цветом квадрат
                 if(border){
