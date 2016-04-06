@@ -5,7 +5,7 @@
 	-fx-font-size: 48px;
 }
 
-.main {
+.statistics {
 	-fx-background-image: url(../background.jpg);
 	-fx-background-position: left-top;
 	-fx-background-repeat: no-repeat;

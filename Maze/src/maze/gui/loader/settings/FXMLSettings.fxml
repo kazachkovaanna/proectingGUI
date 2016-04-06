@@ -22,14 +22,25 @@
       </HBox>
    </bottom>
    <center>
-      <VBox minHeight="600.0" minWidth="1024.0" stylesheets="@setings.css">
+      <VBox alignment="TOP_CENTER" minHeight="600.0" minWidth="1024.0" stylesheets="@setings.css">
          <children>
-            <Label text="Выберите язык:" />
-            <ComboBox prefWidth="150.0" />
+            <Label text="Выберите язык:">
+               <VBox.margin>
+                  <Insets top="100.0" />
+               </VBox.margin></Label>
+            <ComboBox prefWidth="150.0">
+               <VBox.margin>
+                  <Insets bottom="40.0" />
+               </VBox.margin></ComboBox>
             <Label text="Звук:" />
-            <Slider />
-            <Label text="Цвета:" />
-            <ComboBox prefWidth="150.0" />
+            <Slider>
+               <VBox.margin>
+                  <Insets bottom="40.0" />
+               </VBox.margin></Slider>
+            <Label alignment="CENTER_RIGHT" stylesheets="@setings.css" text="Цвета:" textAlignment="CENTER">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin></Label>
             <ColorPicker />
          </children></VBox>
    </center>

@@ -1,5 +1,5 @@
 
-#label {
+.label {
 	-fx-font-style: italic;
 	-fx-font-family: Arial;
 	-fx-font-size: 48px;
@@ -7,7 +7,13 @@
 
 .main {
 	-fx-background-image: url(../background.jpg);
-	-fx-background-position: left-top;
 	-fx-background-repeat: no-repeat;
 	-fx-background-size: cover;
+}
+
+.button {
+    -fx-font-style: italic;
+    -fx-font-family: Arial;
+    -fx-font-size: 16px;
+    
 }
