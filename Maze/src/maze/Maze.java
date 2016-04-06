@@ -3,8 +3,8 @@ package maze;
 import java.util.List;
 
 public class Maze {
-    private Integer weight;
-    private Integer hight;
+    private Integer width;
+    private Integer height;
     private Boolean maze[][];
     private Point start = new Point();
     private Point finish = new Point();
@@ -13,11 +13,11 @@ public class Maze {
      * Коструктор поумолчанию задает ширину и высоту равными 10 и инициализирует лабиринт
      */
     public Maze(){
-        weight = 10; 
-        hight = 10;
-        maze = new Boolean[weight][hight];
-        for(int i = 0; i < weight; i++){
-            for(int j = 0; j < hight; j++){
+        width = 10; 
+        height = 10;
+        maze = new Boolean[width][height];
+        for(int i = 0; i < width; i++){
+            for(int j = 0; j < height; j++){
                 maze[i][j] = false;
             }
         }
@@ -29,11 +29,11 @@ public class Maze {
      * @param h высота лабиринта
     */
     public Maze(final Integer w, final Integer h){
-        weight = w;
-        hight = h;
-        maze = new Boolean[weight][hight];
-        for(int i=0; i<weight; i++){
-            for(int j=0; j<hight; j++){
+        width = w;
+        height = h;
+        maze = new Boolean[width][height];
+        for(int i=0; i<width; i++){
+            for(int j=0; j<height; j++){
                 maze[i][j] = false;
             }
         }
@@ -73,7 +73,7 @@ public class Maze {
      * @return значение true, если маневр возможен, иначе false
      */
     public Boolean right(final Point p){
-        if (p.getX() + 1 > weight) return false;
+        if (p.getX() + 1 > width) return false;
         return isEmpty(p);
     }
 
@@ -83,7 +83,7 @@ public class Maze {
      * @return значение true, если маневр возможен, иначе false
      */
     public Boolean top(final Point p){
-        if (p.getY() + 1 > hight) return false;
+        if (p.getY() + 1 > height) return false;
         return isEmpty(p);
     }
 
@@ -109,21 +109,21 @@ public class Maze {
         
         Boolean[][] exmaze  = maze;
 
-        maze = new Boolean[newWeight][hight]; 
+        maze = new Boolean[newWeight][height]; 
 
-        for (int i=0; i < Integer.min(newWeight, weight); i++){ 
-            System.arraycopy(exmaze[i], 0, maze[i], 0, hight);
+        for (int i=0; i < Integer.min(newWeight, width); i++){ 
+            System.arraycopy(exmaze[i], 0, maze[i], 0, height);
         }
 
-        if (newWeight > weight) {
-            for (int i = weight; i < newWeight; i++){ 
-                for(int j = 0; j < hight; j++){
+        if (newWeight > width) {
+            for (int i = width; i < newWeight; i++){ 
+                for(int j = 0; j < height; j++){
                         maze[i][j] = false;
                 }
             }
         }
 
-        weight = newWeight; 
+        width = newWeight; 
 
     }
 
@@ -132,7 +132,7 @@ public class Maze {
      * @return значение ширины лабиринта
      */
     public Integer getWeight(){
-        return weight;
+        return width;
     }
 
     /**
@@ -146,22 +146,22 @@ public class Maze {
         }
         
         Boolean[][] exmaze = maze;
-        maze = new Boolean[weight][newHight]; 
+        maze = new Boolean[width][newHight]; 
 
-        for (int i=0; i < Integer.min(newHight, hight); i++){ 
-            for(int j = 0; j < weight; j++){
+        for (int i=0; i < Integer.min(newHight, height); i++){ 
+            for(int j = 0; j < width; j++){
                     maze[j][i] = exmaze[j][i];
             }
         }
 
-        if (newHight > hight) {
-            for (int i = hight; i < newHight; i++){ //
-                for(int j = 0; j < weight; j++){
+        if (newHight > height) {
+            for (int i = height; i < newHight; i++){ //
+                for(int j = 0; j < width; j++){
                     maze[j][i] = false;
                 }
             }
         }
-        hight = newHight;
+        height = newHight;
     }
 
     /**
@@ -169,7 +169,7 @@ public class Maze {
      * @return высоты алабиринта
      */
     public Integer getHight(){
-        return hight;
+        return height;
     }
 
     /**
@@ -177,7 +177,7 @@ public class Maze {
      * @param x координата точки по ширине
      */
     public void setStartX(final Integer x){
-        if ((-1 < x) & (x < weight)) start.setX(x);
+        if ((-1 < x) & (x < width)) start.setX(x);
         else System.out.println("Выход за пределы лабиринта");
     }
 
@@ -186,7 +186,7 @@ public class Maze {
      * @param y координата по высоте
      */
     public void setStartY(final Integer y){
-        if ((-1 < y) & (y < hight)) start.setY(y);
+        if ((-1 < y) & (y < height)) start.setY(y);
         else System.out.println("Выход за пределы лабиринта");
     }
 
@@ -215,12 +215,12 @@ public class Maze {
      * 
      */
     public void setFinishX(final Integer x){
-        if ((-1 < x) & (x < weight)) finish.setX(x);
+        if ((-1 < x) & (x < width)) finish.setX(x);
         else System.out.println("Выход за пределы лабиринта");
     }
 
     public void setFinishY(final Integer y){
-        if ((-1 < y) & (y < hight)) finish.setY(y);
+        if ((-1 < y) & (y < height)) finish.setY(y);
         else System.out.println("Выход за пределы лабиринта");
     }
     
