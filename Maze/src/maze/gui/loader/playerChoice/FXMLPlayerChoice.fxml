@@ -10,7 +10,7 @@
    <bottom>
       <HBox alignment="TOP_RIGHT" prefHeight="24.0" prefWidth="492.0" BorderPane.alignment="TOP_RIGHT">
          <children>
-            <Button mnemonicParsing="false" text="Статистика">
+            <Button mnemonicParsing="false" text="Статистика" onAction="#handleStatisticsButtonAction">
                <HBox.margin>
                   <Insets right="20.0" />
                </HBox.margin>
