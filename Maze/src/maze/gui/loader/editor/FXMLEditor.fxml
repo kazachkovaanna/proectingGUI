@@ -11,37 +11,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<<<<<<< HEAD
-<AnchorPane id="AnchorPane" minHeight="600.0" minWidth="1024.0" stylesheets="@editor.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="maze.gui.controllers.FXMLEditorController">
-   <children>
-      <Button layoutX="795.0" layoutY="64.0" minHeight="30.0" minWidth="100.0" mnemonicParsing="false" onAction="#handleSaveButtonAction" text="Сохранить" textAlignment="CENTER" AnchorPane.rightAnchor="121.0" AnchorPane.topAnchor="65.0" />
-      <Label layoutX="172.0" layoutY="28.0" prefHeight="55.0" prefWidth="451.0" text="Редактор уровней" textAlignment="CENTER" AnchorPane.topAnchor="28.0">
-         <padding>
-            <Insets right="20.0" />
-         </padding>
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets></Label>
-      <Canvas fx:id="editArea" height="425.0" width="830.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="65.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="120.0">
-         <effect>
-            <Blend />
-         </effect></Canvas>
-      <Button layoutX="795.0" layoutY="25.0" minHeight="30.0" minWidth="100.0" mnemonicParsing="false" onAction="#handleLoadButtonAction" prefHeight="30.0" prefWidth="108.0" text="Загрузить" textAlignment="CENTER" AnchorPane.rightAnchor="121.0" AnchorPane.topAnchor="25.0">
-         <padding>
-            <Insets right="10.0" />
-         </padding></Button>
-      <Button layoutX="661.0" layoutY="27.0" minHeight="30.0" minWidth="100.0" mnemonicParsing="false" onAction="#handleNewWidthAction" prefHeight="30.0" prefWidth="108.0" text="Ширина..." textAlignment="CENTER" AnchorPane.rightAnchor="255.0" AnchorPane.topAnchor="27.0">
-         <padding>
-            <Insets right="10.0" />
-         </padding></Button>
-      <Button layoutX="661.0" layoutY="66.0" minHeight="30.0" minWidth="100.0" mnemonicParsing="false" onAction="#handleNewHeightAction" prefHeight="30.0" prefWidth="108.0" text="Высота..." textAlignment="CENTER" AnchorPane.rightAnchor="255.0" AnchorPane.topAnchor="66.0">
-         <padding>
-            <Insets right="10.0" />
-         </padding></Button>
-      <Button layoutX="21.0" layoutY="22.0" minHeight="40.0" minWidth="100.0" mnemonicParsing="false" onAction="#handleBackButtonAction" text="Назад" AnchorPane.leftAnchor="21.0" AnchorPane.topAnchor="22.0" />
-   </children>
-</AnchorPane>
-=======
+
 <BorderPane prefHeight="200.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="maze.gui.controllers.FXMLEditorController">
    <top>
       <HBox alignment="CENTER" BorderPane.alignment="CENTER">
@@ -109,4 +79,3 @@
       </Canvas>
    </center>
 </BorderPane>
->>>>>>> origin/master
