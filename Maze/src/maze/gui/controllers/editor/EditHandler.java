@@ -28,6 +28,8 @@ public class EditHandler implements EventHandler<MouseEvent>{
     private double canvasLY;
     private double canvasW;
     private double canvasH;
+
+    private boolean isSaved;
     
     
     DrawMaze drawer;
@@ -43,6 +45,7 @@ public class EditHandler implements EventHandler<MouseEvent>{
         canvasLY = canvas.getLayoutY();
         canvasH = canvas.getHeight();
         canvasW = canvas.getWidth();
+        isSaved = true;
     }
     @Override
     public void handle(MouseEvent event) {
@@ -54,6 +57,7 @@ public class EditHandler implements EventHandler<MouseEvent>{
         //if(eventY > scene.getHeight()-canvas.getHeight())
         if(eventX>canvasLX && eventX < canvasLX+canvasW && eventY>canvasLY && eventY<canvasLY+canvasH)
         {
+            isSaved = false;
             double w = canvasW/maze.getWeight();  //ширина ячейки
             double h = canvasH/maze.getHight();  //высота ячейки
             
@@ -99,6 +103,13 @@ public class EditHandler implements EventHandler<MouseEvent>{
     
     public void redraw(){
         drawer.Draw2D(canvas, maze, true);
+    }
+    public boolean isSaved() {
+        return isSaved;
+    }
+
+    public void setSaved(boolean isSaved) {
+        this.isSaved = isSaved;
     }
     
 }

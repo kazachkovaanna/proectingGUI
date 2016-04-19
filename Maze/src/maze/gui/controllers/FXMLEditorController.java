@@ -11,13 +11,14 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextInputDialog;
 import javafx.stage.FileChooser;
 import maze.Maze;
@@ -32,50 +33,67 @@ import maze.gui.loader.Loader;
 public class FXMLEditorController implements Initializable {
 
     @FXML
-    Canvas editArea;
-    private Scene scene;
-    private EditHandler handler;
-    private Maze maze;
-    FileChooser fileChooser;
-    OutputStream mazeSaver;
-    InputStream mazeLoader;
+    Canvas editArea;            //Ссылка на canvas, в котором рисуется лабиринт
+    private Scene scene;        //Ссылка на сцену, для обработки нажатий
+    private EditHandler handler;    //Обработчик нажатий
+    private Maze maze;          //Изображаемый лабиринт
+    FileChooser fileChooser;    //Окно выбора файла
+    OutputStream mazeSaver;     //Поток, сохраняющий лабиринт
+    InputStream mazeLoader;     //Поток, загружающий лабиринт
     
     
     /**
-     * Initializes the controller class.
+     * Инициализирует контроллер
+     * Рисует новый пустой лабиринт и настраивает выбор файлов
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        DrawMaze drawer = new DrawMazeImpl(); 
-        maze = new Maze();
-        drawer.Draw2D(editArea, maze, true);
+        DrawMaze drawer = new DrawMazeImpl();       //При инициализации надо отрисовать лабиринт впервые
+        maze = new Maze();                          //Пустой лабиринт по умолчанию
+        drawer.Draw2D(editArea, maze, true);        
         fileChooser = new FileChooser();
-        fileChooser.getExtensionFilters().addAll(
+        fileChooser.getExtensionFilters().addAll(   //Связывет название файлов с расширением и ищет в директории только их
                 new FileChooser.ExtensionFilter("Maze", "*.maze")
             );
-        fileChooser.setInitialDirectory(
-                new File(System.getProperty("user.home"))
+        fileChooser.setInitialDirectory(            //директория по умолчанию
+                new File("./src/levels")
             );
         
+    }
+    private void askSaving(){
+        if(!handler.isSaved()){
+            Alert saving = new Alert(AlertType.CONFIRMATION);
+            saving.setTitle("Сохранение");
+            saving.setHeaderText("Сохранить лабиринт?");
+            Optional<ButtonType> result = saving.showAndWait();
+            if (result.get() == ButtonType.OK){
+                handleSaveButtonAction(new ActionEvent());
+            } 
+        }
     }
     
     @FXML
     private void handleBackButtonAction(ActionEvent event) throws IOException{
+        askSaving();
         Loader.getLoader().loadMainMenu();
     }
     
     @FXML
     private void handleSaveButtonAction(ActionEvent event){
         File file = fileChooser.showSaveDialog(null);
+        if (null == file) return;
         try {
             OutputStream.setMaze(maze, file.getPath());
+            handler.setSaved(true);
         } catch (IOException ex) {
             
         }
     }
     @FXML
     private void handleLoadButtonAction(ActionEvent event){
+        askSaving();
         File file = fileChooser.showOpenDialog(null);
+        if (null == file) return;
         try {
             Maze m = InputStream.getMaze(file);
             handler.setMaze(m);
