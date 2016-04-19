@@ -48,7 +48,9 @@ public class Point {
          * @return возвращает true, если объекты равны, иначе false
          */
         public boolean equals(final Point ob) {
+            if(ob!=null)
             return Objects.equals(X, ob.X) && Objects.equals(Y, ob.Y);
+            return false;
         }
 
         /**

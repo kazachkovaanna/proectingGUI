@@ -1,5 +1,6 @@
 package maze.gui.controllers.editor;
 
+import java.util.List;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
@@ -45,6 +46,33 @@ public class DrawMazeImpl implements DrawMaze{
         gc.setLineWidth(1);
         gc.strokeRect(width*maze.getFinishX(), height*maze.getFinishY(), width, height);
         gc.strokeRect(width*maze.getStartX(), height*maze.getStartY(), width, height);
+    }
+
+    @Override
+    public void DrawSolution(Canvas field, Maze maze, boolean border, List<Point> sol, int steps) {       
+        double fieldW = field.getWidth();       //ширина поля
+        double fieldH = field.getHeight();      //высота поля
+        //Пусть лабиринт растягивается на все поле
+        //тогда ширина 1 клетки = ширина поля/число клеток по ширине
+        //аналогично для высоты
+        double height = fieldH/maze.getHight();
+        double width = fieldW/maze.getWeight();
+        GraphicsContext gc = field.getGraphicsContext2D();
+        gc.setFill(Color.DARKSALMON);
+        Point p;
+        if(sol!=null && sol.size() >= steps){
+            if(sol.size() == steps) steps--;
+            for(int i = 1; i<steps; i++){
+                gc.setFill(Color.DARKSALMON);
+                p = sol.get(i);
+                gc.fillRect(p.getX()*width, p.getY()*height, width, height);
+                if(border){
+                    gc.setFill(Color.BLACK);
+                    gc.setLineWidth(1);
+                    gc.strokeRect(p.getX()*width,p.getY()*height, width, height);
+                }
+            }
+        }
     }
     
 }

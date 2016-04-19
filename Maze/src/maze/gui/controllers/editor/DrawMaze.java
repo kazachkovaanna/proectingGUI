@@ -5,8 +5,10 @@
  */
 package maze.gui.controllers.editor;
 
+import java.util.List;
 import javafx.scene.canvas.Canvas;
 import maze.Maze;
+import maze.Point;
 
 /**
  *
@@ -14,4 +16,5 @@ import maze.Maze;
  */
 public interface DrawMaze {
     public void Draw2D(Canvas field, Maze maze, boolean border);
+    public void DrawSolution(Canvas field, Maze maze, boolean border,List<Point> sol, int steps);
 }

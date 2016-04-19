@@ -9,6 +9,7 @@ import IOStreamMaze.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -22,6 +23,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextInputDialog;
 import javafx.stage.FileChooser;
 import maze.Maze;
+import maze.Point;
 import maze.gui.controllers.editor.*;
 import maze.gui.loader.Loader;
 
@@ -92,6 +94,17 @@ public class FXMLEditorController implements Initializable {
      */
     @FXML
     private void handleSaveButtonAction(ActionEvent event){
+        List<Point> solution = maze.getPath(maze.getStart());
+        if(solution == null){
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Нет пути к выходу!!!");
+            alert.setHeaderText("В созданном лабиринте невозможно построить путь к выходу!");
+            alert.setContentText("Лабиринт не будет сохранен!");
+            alert.showAndWait();
+            return;
+        }
+        DrawMaze d = new DrawMazeImpl();
+        d.DrawSolution(editArea, maze, true, solution, solution.size());
         File file = fileChooser.showSaveDialog(null);
         if (null == file) return;
         try {
@@ -112,8 +125,8 @@ public class FXMLEditorController implements Initializable {
         File file = fileChooser.showOpenDialog(null);
         if (null == file) return;
         try {
-            Maze m = InputStream.getMaze(file);
-            handler.setMaze(m);
+            maze = InputStream.getMaze(file);
+            handler.setMaze(maze);
         } catch (IOException ex) {
         }
     }

@@ -49,6 +49,7 @@ public class Maze {
      * @return false, если стенка, иначе true
     */
     public Boolean isEmpty(final Point p){
+        if (p.getX() >= width || p.getY() >= height || p.getX() <0 || p.getY() <0) return false;
         return !maze[p.getX()][p.getY()];
     }
 
@@ -77,7 +78,7 @@ public class Maze {
      * @return значение true, если маневр возможен, иначе false
      */
     public Boolean right(final Point p){
-        if (p.getX() + 1 > width) return false;
+        if (p.getX() >= width || p.getY() >= height || p.getX() <0 || p.getY() <0) return false;
         return isEmpty(p);
     }
 
@@ -354,10 +355,10 @@ public class Maze {
         Point pointTop = new Point(point.getX(), point.getY() + 1);
         
         for(Point p : curr) {
-            if (p.equals(pointLeft)) pointLeft = null;
-            if (p.equals(pointRight)) pointRight = null;
-            if (p.equals(pointTop)) pointTop = null;
-            if (p.equals(pointBot)) pointBot = null;
+            if (pointLeft != null && p.equals(pointLeft)) pointLeft = null;
+            if (pointRight != null && p.equals(pointRight)) pointRight = null;
+            if (pointTop != null && p.equals(pointTop)) pointTop = null;
+            if (pointBot != null && p.equals(pointBot)) pointBot = null;
         }
         
         if (null != pointLeft && left(point)) {
