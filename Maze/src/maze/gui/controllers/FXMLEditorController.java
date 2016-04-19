@@ -60,9 +60,12 @@ public class FXMLEditorController implements Initializable {
             );
         
     }
+    /**
+     * Спрашивает пользователя, надо ли сохранить созданный лабиринт и сохраяет его
+     */
     private void askSaving(){
         if(!handler.isSaved()){
-            Alert saving = new Alert(AlertType.CONFIRMATION);
+            Alert saving = new Alert(AlertType.CONFIRMATION);   //Диалоговое окно с OK и Cancel
             saving.setTitle("Сохранение");
             saving.setHeaderText("Сохранить лабиринт?");
             Optional<ButtonType> result = saving.showAndWait();
@@ -72,12 +75,21 @@ public class FXMLEditorController implements Initializable {
         }
     }
     
+    /**
+     * Обработка события нажатия на кнопку Назад
+     * Спрашивает, сохранить ли файл и выходит в меню
+     * @param event - событие нажатия
+     */
     @FXML
     private void handleBackButtonAction(ActionEvent event) throws IOException{
         askSaving();
         Loader.getLoader().loadMainMenu();
     }
     
+    /**
+     * Обработка события нажатия на кнопку Сохранить
+     * @param event - событие нажатия
+     */
     @FXML
     private void handleSaveButtonAction(ActionEvent event){
         File file = fileChooser.showSaveDialog(null);
@@ -89,6 +101,11 @@ public class FXMLEditorController implements Initializable {
             
         }
     }
+    
+    /**
+     * Обработка события нажатия на кнопку Загрузить
+     * @param event - событие нажатия
+     */
     @FXML
     private void handleLoadButtonAction(ActionEvent event){
         askSaving();
@@ -100,6 +117,11 @@ public class FXMLEditorController implements Initializable {
         } catch (IOException ex) {
         }
     }
+    
+    /**
+     * Обработка события нажатия на кнопку Ширина...
+     * @param event - событие нажатия
+     */
     @FXML
     private void handleNewWidthAction(ActionEvent event){
         TextInputDialog dialog = new TextInputDialog("10");
@@ -107,13 +129,18 @@ public class FXMLEditorController implements Initializable {
         dialog.setHeaderText("Задайте новое значение");
         dialog.setContentText("Новая ширина:");
 
-        // Traditional way to get the response value.
+        
         Optional<String> result = dialog.showAndWait();
         if (result.isPresent()){
             maze.setWeight(Integer.parseInt(result.get()));
         }
         handler.redraw();
     }
+    
+    /**
+     * Обработка события нажатия на кнопку Высота...
+     * @param event - событие нажатия
+     */
     @FXML
     private void handleNewHeightAction(ActionEvent event){
         TextInputDialog dialog = new TextInputDialog("10");
@@ -121,7 +148,7 @@ public class FXMLEditorController implements Initializable {
         dialog.setHeaderText("Задайте новое значение");
         dialog.setContentText("Новая высота:");
 
-        // Traditional way to get the response value.
+        
         Optional<String> result = dialog.showAndWait();
         if (result.isPresent()){
             maze.setHight(Integer.parseInt(result.get()));
@@ -129,9 +156,13 @@ public class FXMLEditorController implements Initializable {
         handler.redraw();
     }
     
+    /**
+     * Настройка сцены (необходима для прикрепления к сцене обработчика нажатий мыши
+     * @param sc - новая сцена
+     */
     public void setScene(Scene sc){
         scene = sc;
-        handler = new EditHandler(this, editArea, scene, maze);
+        handler = new EditHandler(this, editArea,maze);
         scene.setOnMouseClicked(handler);
        
     }
