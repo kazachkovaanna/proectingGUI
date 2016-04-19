@@ -21,6 +21,8 @@ public class Maze {
                 maze[i][j] = false;
             }
         }
+        finish.setX(width-1);
+        finish.setY(height-1);
     }
 
     /**
@@ -37,6 +39,8 @@ public class Maze {
                 maze[i][j] = false;
             }
         }
+        finish.setX(width-1);
+        finish.setY(height-1);
     }
 
     /**
@@ -122,6 +126,46 @@ public class Maze {
                 }
             }
         }
+        else if(newWeight < width){
+            if(finish.getX()>newWeight-1){
+                boolean found = false;
+                int w = newWeight-1, h = height-1;
+                Point p = new Point();
+                while(!found){
+                    for(w = newWeight; w>0 && !found; ){
+                        w--;
+                        for(h = height; h>0 && !found; ){
+                            h--;
+                            p.setX(w);
+                            p.setY(h);
+                            if(!maze[w][h] && !start.equals(p)) found = true;
+                        }
+
+                    }
+                }
+                finish.setX(w);
+                finish.setY(h);
+            }
+            if(start.getX() >newWeight-1){
+                boolean found = false;
+                int w = newWeight-1, h = height-1;
+                Point p = new Point();
+                while(!found){
+                    for(w = newWeight; w>0 && !found; ){
+                        w--;
+                        for(h = height; h>0 && !found; ){
+                            h--;
+                            p.setX(w);
+                            p.setY(h);
+                            if(!maze[w][h]&& !finish.equals(p)) found = true;
+                        }
+
+                    }
+                }
+                start.setX(w);
+                start.setY(h);
+            }
+        }
 
         width = newWeight; 
 
@@ -159,6 +203,43 @@ public class Maze {
                 for(int j = 0; j < width; j++){
                     maze[j][i] = false;
                 }
+            }
+        }
+        else if(newHight < height){
+            if(finish.getY()>newHight-1){
+                boolean found = false;
+                int w = width-1, h = newHight-1;
+                while(!found){
+                    for(w = width; w>0 && !found; ){
+                        w--;
+                        for(h = newHight; h>0 && !found; ){
+                            h--;
+                            if(!maze[w][h]) found = true;
+                        }
+
+                    }
+                }
+                finish.setX(w);
+                finish.setY(h);
+            }
+            if(start.getY() >newHight-1){
+                boolean found = false;
+                int w = width-1, h = newHight-1;
+                Point p = new Point();
+                while(!found){
+                    for(w = width; w>0 && !found; ){
+                        w--;
+                        for(h = newHight; h>0 && !found; ){
+                            h--;
+                            p.setX(w);
+                            p.setY(h);
+                            if(!maze[w][h]&& !finish.equals(p)) found = true;
+                        }
+
+                    }
+                }
+                start.setX(w);
+                start.setY(h);
             }
         }
         height = newHight;
