@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane id="main" minHeight="600.0" minWidth="1024.0" styleClass="main" stylesheets="@choicePlayer.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="maze.gui.controllers.FXMLPlayerChoiceController">
+   <bottom>
+      <HBox alignment="TOP_RIGHT" prefHeight="24.0" prefWidth="492.0" BorderPane.alignment="TOP_RIGHT">
+         <children>
+            <Button mnemonicParsing="false" text="Статистика" onAction="#handleStatisticsButtonAction">
+               <HBox.margin>
+                  <Insets right="20.0" />
+               </HBox.margin>
+            </Button>
+            <Button defaultButton="true" mnemonicParsing="false" onAction="#handleOkButtonAction" prefWidth="100.0" text="Применить">
+               <HBox.margin>
+                  <Insets right="20.0" />
+               </HBox.margin>
+            </Button>
+            <Button cancelButton="true" mnemonicParsing="false" onAction="#handleCancelButtonAction" prefWidth="100.0" text="Отмена" textAlignment="CENTER" />
+         </children>
+         <BorderPane.margin>
+            <Insets bottom="25.0" left="100.0" right="50.0" />
+         </BorderPane.margin>
+      </HBox>
+   </bottom>
+   <center>
+      <ListView editable="true" opacity="0.5" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets bottom="30.0" left="50.0" right="50.0" top="30.0" />
+         </BorderPane.margin>
+      </ListView>
+   </center>
+   <top>
+      <Label id="label" contentDisplay="CENTER" text="Выбор игрока" textAlignment="CENTER" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets top="50.0" />
+         </BorderPane.margin>
+      </Label>
+   </top>
+</BorderPane>

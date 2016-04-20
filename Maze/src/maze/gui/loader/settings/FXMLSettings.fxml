@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane minHeight="480.0" minWidth="640.0" styleClass="main" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="maze.gui.controllers.FXMLSettingsController">
+   <bottom>
+      <HBox alignment="TOP_RIGHT" BorderPane.alignment="TOP_RIGHT">
+         <children>
+            <Button defaultButton="true" mnemonicParsing="false" onAction="#handleOkButtonAction" prefWidth="100.0" text="Применить">
+               <HBox.margin>
+                  <Insets right="20.0" />
+               </HBox.margin>
+            </Button>
+            <Button cancelButton="true" mnemonicParsing="false" onAction="#handleCancelButtonAction" prefWidth="100.0" text="Отмена" />
+         </children>
+         <BorderPane.margin>
+            <Insets bottom="25.0" right="50.0" />
+         </BorderPane.margin>
+      </HBox>
+   </bottom>
+   <center>
+      <VBox alignment="TOP_CENTER" minHeight="600.0" minWidth="1024.0" stylesheets="@setings.css">
+         <children>
+            <Label text="Выберите язык:">
+               <VBox.margin>
+                  <Insets top="100.0" />
+               </VBox.margin></Label>
+            <ComboBox prefWidth="150.0">
+               <VBox.margin>
+                  <Insets bottom="40.0" />
+               </VBox.margin></ComboBox>
+            <Label text="Звук:" />
+            <Slider>
+               <VBox.margin>
+                  <Insets bottom="40.0" />
+               </VBox.margin></Slider>
+            <Label alignment="CENTER_RIGHT" stylesheets="@setings.css" text="Цвета:" textAlignment="CENTER">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin></Label>
+            <ColorPicker />
+         </children></VBox>
+   </center>
+</BorderPane>
