@@ -68,8 +68,7 @@ public class Maze {
      * @return значение true, если маневр возможен, иначе false
      */
     public Boolean left(final Point p){
-        if (p.getX() - 1 < 0) return false;
-        return isEmpty(p);
+        return isEmpty(Point.minus(p, new Point(1, 0)));
     }
 
     /**
@@ -78,8 +77,7 @@ public class Maze {
      * @return значение true, если маневр возможен, иначе false
      */
     public Boolean right(final Point p){
-        if (p.getX() >= width || p.getY() >= height || p.getX() <0 || p.getY() <0) return false;
-        return isEmpty(p);
+        return isEmpty(Point.plus(p, new Point(1, 0)));
     }
 
     /**
@@ -88,8 +86,7 @@ public class Maze {
      * @return значение true, если маневр возможен, иначе false
      */
     public Boolean top(final Point p){
-        if (p.getY() + 1 > height) return false;
-        return isEmpty(p);
+        return isEmpty(Point.plus(p, new Point(0, 1)));
     }
 
     /**
@@ -98,8 +95,7 @@ public class Maze {
      * @return значение true, если маневр возможен, иначе false
      */
     public Boolean bottom(final Point p){
-        if (p.getY() - 1 < 0) return false;
-        return isEmpty(p);
+        return isEmpty(Point.minus(p, new Point(0, 1)));
     }
 
     /**
