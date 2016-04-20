@@ -6,12 +6,12 @@ public class Maze {
     private Integer width;
     private Integer height;
     private Boolean maze[][];
-    private Boolean notAccessibleWay[][];
+    private final Boolean notAccessibleWay[][];
     private Point start = new Point();
     private Point finish = new Point();
 
     /**
-     * Коструктор поумолчанию задает ширину и высоту равными 10 и инициализирует лабиринт
+     * Коструктор поумолчанию задает ширину и высоту равными 10 и инициализирует лабиринт.
      */
     public Maze(){
         width = 10; 
@@ -28,9 +28,9 @@ public class Maze {
     }
 
     /**
-    * Коструктор задает ширину и высоту, а также инициализирует лабиринт
-     * @param w ширина лабиринта
-     * @param h высота лабиринта
+    * Коструктор задает ширину и высоту, а также инициализирует лабиринт.
+     * @param w ширина лабиринта.
+     * @param h высота лабиринта.
     */
     public Maze(final Integer w, final Integer h){
         width = w;
@@ -47,9 +47,9 @@ public class Maze {
     }
 
     /**
-     * Проверка на наличие стенки в лабиринте с координатами x и y
-     * @param p координаты ячейки
-     * @return false, если стенка, иначе true
+     * Проверка на наличие стенки в лабиринте с координатами x и y.
+     * @param p координаты ячейки.
+     * @return false, если стенка, иначе true.
     */
     public Boolean isEmpty(final Point p){
         if (p.getX() >= width || p.getY() >= height || p.getX() <0 || p.getY() <0) return false;
@@ -57,59 +57,56 @@ public class Maze {
     }
 
     /**
-     * Задание значения ячейке с заданными координатами
-     * @param p координаты ячейки
-     * @param isNotWall false, если стенка, иначе true
+     * Задание значения ячейке с заданными координатами.
+     * @param p координаты ячейки.
+     * @param isNotWall false, если стенка, иначе true.
      */
     public void set(final Point p, final Boolean isNotWall){
         maze[p.getX()][p.getY()] = isNotWall;	
     }
 
     /**
-     * Определение возможности идти налево из заданной ячейки
-     * @param p координаты ячейки
-     * @return значение true, если маневр возможен, иначе false
+     * Определение возможности идти налево из заданной ячейки.
+     * @param p координаты ячейки.
+     * @return значение true, если маневр возможен, иначе false.
      */
     public Boolean left(final Point p){
         return isEmpty(Point.minus(p, new Point(1, 0)));
     }
 
     /**
-     * Определение возможности идти направо из заданной ячейки
-     * @param p координаты ячейки
-     * @return значение true, если маневр возможен, иначе false
+     * Определение возможности идти направо из заданной ячейки.
+     * @param p координаты ячейки.
+     * @return значение true, если маневр возможен, иначе false.
      */
     public Boolean right(final Point p){
         return isEmpty(Point.plus(p, new Point(1, 0)));
     }
 
     /**
-     * Определение возможности идти вверх из заданной ячейки
-     * @param p координаты ячейки
-     * @return значение true, если маневр возможен, иначе false
+     * Определение возможности идти вверх из заданной ячейки.
+     * @param p координаты ячейки.
+     * @return значение true, если маневр возможен, иначе false.
      */
     public Boolean top(final Point p){
         return isEmpty(Point.plus(p, new Point(0, 1)));
     }
 
     /**
-     * Определение возможности идти вниз из заданной ячейки
-     * @param p координаты ячейки
-     * @return значение true, если маневр возможен, иначе false
+     * Определение возможности идти вниз из заданной ячейки.
+     * @param p координаты ячейки.
+     * @return значение true, если маневр возможен, иначе false.
      */
     public Boolean bottom(final Point p){
         return isEmpty(Point.minus(p, new Point(0, 1)));
     }
 
     /**
-     * Изменение ширины лабиринта
-     * @param newWeight новая ширина лабиринта
+     * Изменение ширины лабиринта.
+     * @param newWeight новая ширина лабиринта для задания.
      */
-    public void setWeight(final Integer newWeight){
-        if (newWeight < 0) {
-            System.out.println("Невозможно изменить ширину!");
-            return;
-        }
+    public void setWeight(final Integer newWeight) {
+        if (newWeight < 0) throw new ArrayIndexOutOfBoundsException("Некорректная ширина");
         
         Boolean[][] exmaze  = maze;
 
@@ -167,27 +164,29 @@ public class Maze {
             }
         }
 
-        width = newWeight; 
-
+        width = newWeight;
     }
 
     /**
-     * Возврат текущей ширины лыбиринта
-     * @return значение ширины лабиринта
+     * @return значение ширины лабиринта.
      */
     public Integer getWeight(){
         return width;
     }
+    
+    /**
+     * @return значение высоты лабиринта.
+     */
+    public Integer getHight(){
+        return height;
+    }
 
     /**
-     * Изменение высота лабиринта 
-     * @param newHight новая высота лабиринта
+     * Изменение высоты лабиринта.
+     * @param newHight новая высота лабиринта для задания.
      */
-    public void setHight(final Integer newHight){
-        if (newHight < 0) {
-            System.out.println("Невозможно изменить ширину!");
-            return;
-        }
+    public void setHight(final Integer newHight) {
+        if (newHight < 0) throw new ArrayIndexOutOfBoundsException("Некорректная высота");
         
         Boolean[][] exmaze = maze;
         maze = new Boolean[width][newHight]; 
@@ -246,32 +245,6 @@ public class Maze {
     }
 
     /**
-     * Возврат высоту лабиринта
-     * @return высоты алабиринта
-     */
-    public Integer getHight(){
-        return height;
-    }
-
-    /**
-     * Задание координаты стартовой точки по x
-     * @param x координата точки по ширине
-     */
-    public void setStartX(final Integer x){
-        if ((-1 < x) & (x < width)) start.setX(x);
-        else System.out.println("Выход за пределы лабиринта");
-    }
-
-    /**
-     * Задание координаты стартовой точки по y
-     * @param y координата по высоте
-     */
-    public void setStartY(final Integer y){
-        if ((-1 < y) & (y < height)) start.setY(y);
-        else System.out.println("Выход за пределы лабиринта");
-    }
-
-    /**
      * @return координаты стартовой точки по х.
      */
     public Integer getStartX(){
@@ -286,42 +259,49 @@ public class Maze {
     }
     
     /**
-     * @param Start координаты стартовой точки для задания.
-     */
-    public void setStart(final Point Start) {
-        
-        start = new Point(Start);
-    }
-    
-    /**
      * @return координаты стартовой точки.
      */
     public Point getStart() {
         return start;
     }
-
+    
     /**
-     * @param x координаты финишной точки по х для задания.
+     * @param x координата точки по ширине для задания.
      */
-    public void setFinishX(final Integer x){
-        if ((-1 < x) & (x < width)) finish.setX(x);
-        else System.out.println("Выход за пределы лабиринта");
-    }
-
-    /**
-     * @param y координаты финишной точки по у для задания.
-     */
-    public void setFinishY(final Integer y){
-        if ((-1 < y) & (y < height)) finish.setY(y);
-        else System.out.println("Выход за пределы лабиринта");
+    public void setStartX(final Integer x){
+        if ((-1 < x) && (x < width)) start.setX(x);
+        else throw new ArrayIndexOutOfBoundsException("Некорректная ширина");
     }
     
     /**
-     * @param f координаты финишной точки для задания.
+     * @param y координата по высоте.
      */
-    public void setFinish(final Point f) {
-        //проверка
-        finish = new Point(f);
+    public void setStartY(final Integer y){
+        if ((-1 < y) & (y < height)) start.setY(y);
+        else throw new ArrayIndexOutOfBoundsException("Некорректная высота");
+    }
+    
+    /**
+     * @param s координаты стартовой точки для задания.
+     */
+    public void setStart(final Point s) {
+        if (s.getX() >= width || s.getX() < 0 || s.getY() >= height || s.getY() < 0)
+            throw new ArrayIndexOutOfBoundsException("Некорректная координата стартовой точки");
+        start = new Point(s);
+    }
+    
+    /**
+     * @return координаты финишной точки по ширине.
+     */
+    public Integer getFinishX(){
+        return finish.getX();
+    }
+
+    /**
+     * @return координаты финишной точки по высоте.
+     */
+    public Integer getFinishY(){
+        return finish.getY();
     }
     
     /**
@@ -330,23 +310,35 @@ public class Maze {
     public Point getFinish() {
         return finish;
     }
-
+    
     /**
-     * @return координаты финишной точки по х.
+     * @param x координаты финишной точки по ширине для задания.
      */
-    public Integer getFinishX(){
-        return finish.getX();
+    public void setFinishX(final Integer x){
+        if ((-1 < x) & (x < width)) finish.setX(x);
+        else throw new ArrayIndexOutOfBoundsException("Некорректная координата финишной точки");
     }
 
     /**
-     * @return координаты финишной точки по у.
+     * @param y координаты финишной точки по высоте для задания.
      */
-    public Integer getFinishY(){
-        return finish.getY();
+    public void setFinishY(final Integer y){
+        if ((-1 < y) & (y < height)) finish.setY(y);
+        else throw new ArrayIndexOutOfBoundsException("Некорректная координата финишной точки");
     }
+    
+    /**
+     * @param f координаты финишной точки для задания.
+     */
+    public void setFinish(final Point f) {
+        if (f.getX() >= width || f.getX() < 0 || f.getY() >= height || f.getY() < 0)
+            throw new ArrayIndexOutOfBoundsException("Некорректная координата стартовой точки");
+        finish = new Point(f);
+    }
+    
 
     /**
-     * Поиск одного из наикратчайших путей по лабиринту.
+     * Поиск одного из наикратчайших путей по лабиринту из заданной точки.
      * @param p точка, с которой начинается поиск
      * @return список координат клеток одного из наикратчайший путей.
      */
