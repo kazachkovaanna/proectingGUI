@@ -1,5 +1,6 @@
 package maze.gui.loader;
 
+import java.io.File;
 import java.io.IOException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -79,7 +80,7 @@ public class Loader {
     /**
      * Загружает окно прохождения уровня. Если такого окна еще не существует, создает его
      */
-    public void loadGameLevel() throws IOException{
+    public void loadGameLevel(File level) throws IOException{
         if(gameLevel == null){
             fxmlLoader = new FXMLLoader(getClass().getResource("gameProcess/FXMLGameProcess.fxml"));                
             Parent root = fxmlLoader.load();
@@ -89,6 +90,7 @@ public class Loader {
             gameLevel = scene;
             gameController.setScene(gameLevel); //Поэтому контроллеру после его инициализации передается ссылка на сцену
         }
+        gameController.setLevel(level);
         stage.setScene(gameLevel);
     }
     

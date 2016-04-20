@@ -10,8 +10,11 @@
 <AnchorPane id="AnchorPane" minHeight="600.0" minWidth="1024.0" stylesheets="@levelChoice.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="maze.gui.controllers.FXMLLevelChoiceController">
    <children>
       <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleBackButtonAction" text="Назад" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="18.0" />
-      <Button layoutX="37.0" layoutY="71.0" minHeight="40.0" minWidth="100.0" mnemonicParsing="false" onAction="#handleLevelButtonAction" text="Уровень 1" AnchorPane.leftAnchor="37.0" AnchorPane.topAnchor="100.0" />
-      <Button layoutX="183.0" layoutY="71.0" minHeight="40.0" minWidth="100.0" mnemonicParsing="false" onAction="#handleLevelButtonAction" text="Уровень 2" AnchorPane.leftAnchor="183.0" AnchorPane.topAnchor="100.0" />
+      <GridPane fx:id="gridPane" alignment="CENTER" layoutX="6.0" layoutY="100.0" prefHeight="467.0" prefWidth="1011.0">
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+      </GridPane>
       <Label layoutX="244.0" layoutY="23.0" text="Выберите уровень:" />
    </children>
 </AnchorPane>

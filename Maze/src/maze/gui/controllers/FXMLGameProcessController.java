@@ -5,6 +5,7 @@
  */
 package maze.gui.controllers;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -51,7 +52,7 @@ public class FXMLGameProcessController implements Initializable {
         scene.setOnKeyPressed(new GameHandler(this));
     }
     
-    public void setLevel(int level){
+    public void setLevel(File level){
         
     }
     
