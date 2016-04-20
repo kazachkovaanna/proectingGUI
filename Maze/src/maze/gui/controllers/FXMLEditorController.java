@@ -95,7 +95,7 @@ public class FXMLEditorController implements Initializable {
     @FXML
     private void handleSaveButtonAction(ActionEvent event){
         List<Point> solution = maze.getPath(maze.getStart());
-        if(solution == null){
+        if(solution == null || solution.size() == 0){
             Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Нет пути к выходу!!!");
             alert.setHeaderText("В созданном лабиринте невозможно построить путь к выходу!");
