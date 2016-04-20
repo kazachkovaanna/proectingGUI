@@ -57,8 +57,13 @@ public class FXMLEditorController implements Initializable {
         fileChooser.getExtensionFilters().addAll(   //Связывет название файлов с расширением и ищет в директории только их
                 new FileChooser.ExtensionFilter("Maze", "*.maze")
             );
+<<<<<<< Updated upstream
         fileChooser.setInitialDirectory(            //директория по умолчанию
                 new File("./src/levels")
+=======
+        fileChooser.setInitialDirectory(
+                new File(System.getProperty("./src"))
+>>>>>>> Stashed changes
             );
         
     }
