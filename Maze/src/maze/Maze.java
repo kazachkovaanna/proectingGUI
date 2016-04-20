@@ -6,6 +6,7 @@ public class Maze {
     private Integer width;
     private Integer height;
     private Boolean maze[][];
+    private Boolean notAccessibleWay[][];
     private Point start = new Point();
     private Point finish = new Point();
 
@@ -16,6 +17,7 @@ public class Maze {
         width = 10; 
         height = 10;
         maze = new Boolean[width][height];
+        notAccessibleWay = new Boolean[width][height];
         for(int i = 0; i < width; i++){
             for(int j = 0; j < height; j++){
                 maze[i][j] = false;
@@ -34,6 +36,7 @@ public class Maze {
         width = w;
         height = h;
         maze = new Boolean[width][height];
+        notAccessibleWay = new Boolean[width][height];
         for(int i=0; i<width; i++){
             for(int j=0; j<height; j++){
                 maze[i][j] = false;
@@ -268,64 +271,89 @@ public class Maze {
         else System.out.println("Выход за пределы лабиринта");
     }
 
-    /**координаты начала, их задание
-     * 
-     * @return 
+    /**
+     * @return координаты стартовой точки по х.
      */
     public Integer getStartX(){
         return start.getX();
     }
 
+    /**
+     * @return координаты стартовой точки по у.
+     */
     public Integer getStartY(){
         return start.getY();
     }
     
+    /**
+     * @param Start координаты стартовой точки для задания.
+     */
     public void setStart(final Point Start) {
-        //проверка
+        
         start = new Point(Start);
     }
     
+    /**
+     * @return координаты стартовой точки.
+     */
     public Point getStart() {
         return start;
     }
 
-    /**координаты конца, их задание
-     * 
+    /**
+     * @param x координаты финишной точки по х для задания.
      */
     public void setFinishX(final Integer x){
         if ((-1 < x) & (x < width)) finish.setX(x);
         else System.out.println("Выход за пределы лабиринта");
     }
 
+    /**
+     * @param y координаты финишной точки по у для задания.
+     */
     public void setFinishY(final Integer y){
         if ((-1 < y) & (y < height)) finish.setY(y);
         else System.out.println("Выход за пределы лабиринта");
     }
     
+    /**
+     * @param f координаты финишной точки для задания.
+     */
     public void setFinish(final Point f) {
         //проверка
         finish = new Point(f);
     }
     
+    /**
+     * @return координаты финишной точки.
+     */
     public Point getFinish() {
         return finish;
     }
 
+    /**
+     * @return координаты финишной точки по х.
+     */
     public Integer getFinishX(){
         return finish.getX();
     }
 
+    /**
+     * @return координаты финишной точки по у.
+     */
     public Integer getFinishY(){
         return finish.getY();
     }
 
     /**
-     *
+     * Поиск одного из наикратчайших путей по лабиринту.
      * @param p точка, с которой начинается поиск
-     * @return список координат клеток одного из наикратчайший путей, 
-     * null если пути не существует или запрос делается из конечной точки.
+     * @return список координат клеток одного из наикратчайший путей.
      */
     public List<Point> getPath(final Point p) {
+        for (int i = 0; i < width; i++)
+            for (int j = 0; j < height; j++)
+                notAccessibleWay[i][j] = false;
         List<Point> curr = new java.util.ArrayList<>();
         List<Point> best = new java.util.ArrayList<>();
         curr.add(p);
@@ -333,22 +361,39 @@ public class Maze {
         return best;
     }
     
-    private void getPath(List<Point> curr, List<Point> best) {
+    private void setNotAccessibleWay(final Point p){
+        if (p.getX() >= width || p.getY() >= height || p.getX() <0 || p.getY() <0) return;
+        notAccessibleWay[p.getX()][p.getY()] = true;
+    }
+    
+    private boolean isNotAccessibleWay(final Point p) {
+        if (p.getX() >= width || p.getY() >= height || p.getX() <0 || p.getY() <0) return false;
+        return notAccessibleWay[p.getX()][p.getY()];
+    }
+    
+    private boolean getPath(List<Point> curr, List<Point> best) {
         int currSize = curr.size();
         int bestSize = best.size();
-        if (bestSize != 0 && currSize >= bestSize) return;
+        if (bestSize != 0 && currSize >= bestSize) return false;
         
         Point point = curr.get(currSize - 1);
         if (point.equals(getFinish())) {
             best.clear();
             best.addAll(curr);
-            return;
+            return true;
         }
         
-        Point pointLeft = new Point(point.getX() - 1, point.getY());
-        Point pointRight = new Point(point.getX() + 1, point.getY());
-        Point pointBot = new Point(point.getX(), point.getY() - 1);
-        Point pointTop = new Point(point.getX(), point.getY() + 1);
+        boolean result = false;
+        
+        Point pointLeft = Point.minus(point, new Point(1, 0));
+        Point pointRight = Point.plus(point, new Point(1, 0));
+        Point pointBot = Point.minus(point, new Point(0, 1));
+        Point pointTop = Point.plus(point, new Point(0, 1));
+        
+        if (isNotAccessibleWay(pointLeft)) pointLeft = null;
+        if (isNotAccessibleWay(pointRight)) pointRight = null;
+        if (isNotAccessibleWay(pointBot)) pointBot = null;
+        if (isNotAccessibleWay(pointTop)) pointTop = null;
         
         for(Point p : curr) {
             if (pointLeft != null && p.equals(pointLeft)) pointLeft = null;
@@ -359,26 +404,31 @@ public class Maze {
         
         if (null != pointLeft && left(point)) {
             curr.add(pointLeft);
-            getPath(curr, best);
+            if (getPath(curr, best)) result = true;
+            else setNotAccessibleWay(pointLeft);
             curr.remove(currSize);
         }
         
         if (null != pointTop && top(point)) {
             curr.add(pointTop);
-            getPath(curr, best);
+            if (getPath(curr, best)) result = true;
+            else setNotAccessibleWay(pointTop);
             curr.remove(currSize);
         }
         
         if (null != pointRight && right(point)) {
             curr.add(pointRight);
-            getPath(curr, best);
+            if (getPath(curr, best)) result = true;
+            else setNotAccessibleWay(pointRight);
             curr.remove(currSize);
         }
         
         if (null != pointBot && bottom(point)) {
             curr.add(pointBot);
-            getPath(curr, best);
+            if (getPath(curr, best)) result = true;
+            else setNotAccessibleWay(pointBot);
             curr.remove(currSize);
         }
+        return result;
     }
 }
