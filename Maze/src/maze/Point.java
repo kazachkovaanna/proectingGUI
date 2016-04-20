@@ -84,4 +84,12 @@ public class Point {
         public Integer getY() {
             return Y;
         }
+        
+        public static Point plus(final Point p1, final Point p2) {
+            return new Point(p1.X + p2.X, p1.Y + p2.Y);
+        }
+        
+        public static Point minus(final Point p1, final Point p2) {
+            return new Point(p1.X - p2.X, p1.Y - p2.Y);
+        }
     }
