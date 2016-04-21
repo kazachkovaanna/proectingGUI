@@ -17,4 +17,5 @@ import maze.Point;
 public interface DrawMaze {
     public void Draw2D(Canvas field, Maze maze, boolean border);
     public void DrawSolution(Canvas field, Maze maze, boolean border,List<Point> sol, int steps);
+    public void DrawMan(Canvas field, Point from, Point to, Maze maze);
 }

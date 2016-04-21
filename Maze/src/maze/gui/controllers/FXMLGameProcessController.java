@@ -18,6 +18,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import maze.Maze;
 import maze.gui.controllers.editor.DrawMaze;
@@ -33,23 +36,30 @@ import maze.gui.loader.Loader;
 public class FXMLGameProcessController implements Initializable {
 
     private boolean pause;      //true РµСЃР»Рё РёРіСЂР° РЅР° РїР°СѓР·Рµ
+    private boolean finish;
     private Scene scene;
     @FXML
     private VBox pauseBox;
     @FXML
     private Canvas canvas;
-    private DrawMaze drawer;
+    @FXML
+    private Button back;
+    @FXML
+    private Button play;
+    @FXML
+    private Button hint;
+    private GameHandler handler;
     private Maze maze;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        drawer = new DrawMazeImpl();        
+        unPause();
     }
     @FXML
     private void handleBackButtonAction(ActionEvent event) throws IOException{
-        Loader.getLoader().loadMainMenu();
+        Loader.getLoader().loadLevelChoice();
     }
     
     @FXML
@@ -57,21 +67,51 @@ public class FXMLGameProcessController implements Initializable {
         this.unPause();
     }
     
+    @FXML
+    private void getHint(ActionEvent event){
+        unPause();
+        handler.getHint();
+        
+    }
+    
     public void setScene(Scene sc){
         scene = sc;
-        scene.setOnKeyPressed(new GameHandler(this));
+        handler = new GameHandler(this, canvas, maze);
+        scene.setOnKeyPressed(handler);
     }
     
     public void setLevel(File level){
         try {
             maze = InputStream.getMaze(level);
+            handler.setMaze(maze);
+            finish = false;
+            unPause();
+            hint.setDisable(false);
+        play.setDisable(false);
         } catch (IOException ex) {
         }
+    }
+    
+    public void finish(){
+        finish = true;
+        hint.setDisable(true);
+        play.setDisable(true);
+        pause();
+        Alert dialog = new Alert(AlertType.INFORMATION);
+        dialog.setTitle("Уровень пройден!");
+        dialog.setHeaderText("Уровень пройден!");
+        dialog.setContentText("Число шагов: "+ handler.getSteps() + "\nЧисло подсказок: "+handler.getHints());
+        dialog.showAndWait();
+    }
+    
+    public boolean isFinish(){
+        return finish;
     }
     
     public void pause(){
         pause = true;
         pauseBox.setVisible(pause);
+        
     }
     
     public void unPause(){

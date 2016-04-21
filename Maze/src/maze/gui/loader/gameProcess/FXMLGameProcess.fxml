@@ -9,27 +9,30 @@
 
 <AnchorPane minHeight="600.0" minWidth="1024.0" stylesheets="@gameProcess.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="maze.gui.controllers.FXMLGameProcessController">
    <children>
-      <MeshView AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-      <VBox id="pauseBox" fx:id="pauseBox" alignment="CENTER" prefHeight="200.0" prefWidth="200.0" styleClass="pauseBox" stylesheets="@gameProcess.css" visible="false" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="100.0">
+      <Canvas fx:id="canvas" height="600.0" width="1024.0" />
+      <VBox id="pauseBox" fx:id="pauseBox" alignment="CENTER" prefHeight="200.0" prefWidth="200.0" styleClass="pauseBox" stylesheets="@gameProcess.css" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="100.0">
          <children>
             <Label id="label" minHeight="-Infinity" minWidth="-Infinity" text="Пауза">
                <VBox.margin>
                   <Insets bottom="30.0" />
                </VBox.margin>
             </Label>
-            <Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleContinueButtonAction" text="Продолжить">
+            <Button fx:id="play" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleContinueButtonAction" text="Продолжить">
                <VBox.margin>
                   <Insets bottom="30.0" />
                </VBox.margin>
             </Button>
-            <Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleBackButtonAction" text="В меню">
+            <Button fx:id="back" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleBackButtonAction" text="Назад">
+               <VBox.margin>
+                  <Insets bottom="30.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="hint" mnemonicParsing="false" onAction="#getHint" text="Подсказка">
                <VBox.margin>
                   <Insets bottom="30.0" />
                </VBox.margin>
             </Button>
          </children>
       </VBox>
-      <Label layoutX="430.0" layoutY="46.0" prefHeight="55.0" prefWidth="602.0" text="Выберись из лабиринта!" AnchorPane.leftAnchor="200.0" AnchorPane.topAnchor="40.0" />
-      <Button layoutX="882.0" layoutY="547.0" minHeight="30.0" minWidth="100.0" mnemonicParsing="false" text="Назад" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="40.0" />
    </children>
 </AnchorPane>

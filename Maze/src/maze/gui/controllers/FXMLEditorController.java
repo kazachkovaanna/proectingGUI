@@ -104,6 +104,7 @@ public class FXMLEditorController implements Initializable {
             return;
         }
         DrawMaze d = new DrawMazeImpl();
+        solution.remove(0);
         d.DrawSolution(editArea, maze, true, solution, solution.size());
         File file = fileChooser.showSaveDialog(null);
         if (null == file) return;

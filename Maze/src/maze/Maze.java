@@ -262,7 +262,7 @@ public class Maze {
      * @return координаты стартовой точки.
      */
     public Point getStart() {
-        return start;
+        return new Point(start);
     }
     
     /**
@@ -308,7 +308,7 @@ public class Maze {
      * @return координаты финишной точки.
      */
     public Point getFinish() {
-        return finish;
+        return new Point(finish);
     }
     
     /**
@@ -343,9 +343,7 @@ public class Maze {
      * @return список координат клеток одного из наикратчайший путей.
      */
     public List<Point> getPath(final Point p) {
-        for (int i = 0; i < width; i++)
-            for (int j = 0; j < height; j++)
-                notAccessibleWay[i][j] = false;
+        
         List<Point> curr = new java.util.ArrayList<>();
         List<Point> best = new java.util.ArrayList<>();
         curr.add(p);
@@ -353,39 +351,25 @@ public class Maze {
         return best;
     }
     
-    private void setNotAccessibleWay(final Point p){
-        if (p.getX() >= width || p.getY() >= height || p.getX() <0 || p.getY() <0) return;
-        notAccessibleWay[p.getX()][p.getY()] = true;
-    }
-    
-    private boolean isNotAccessibleWay(final Point p) {
-        if (p.getX() >= width || p.getY() >= height || p.getX() <0 || p.getY() <0) return false;
-        return notAccessibleWay[p.getX()][p.getY()];
-    }
-    
-    private boolean getPath(List<Point> curr, List<Point> best) {
+    private void getPath(List<Point> curr, List<Point> best) {
         int currSize = curr.size();
         int bestSize = best.size();
-        if (bestSize != 0 && currSize >= bestSize) return false;
+        if (bestSize != 0 && currSize >= bestSize) return;
         
         Point point = curr.get(currSize - 1);
         if (point.equals(getFinish())) {
             best.clear();
             best.addAll(curr);
-            return true;
+            return;
         }
         
-        boolean result = false;
         
         Point pointLeft = Point.minus(point, new Point(1, 0));
         Point pointRight = Point.plus(point, new Point(1, 0));
         Point pointBot = Point.minus(point, new Point(0, 1));
         Point pointTop = Point.plus(point, new Point(0, 1));
         
-        if (isNotAccessibleWay(pointLeft)) pointLeft = null;
-        if (isNotAccessibleWay(pointRight)) pointRight = null;
-        if (isNotAccessibleWay(pointBot)) pointBot = null;
-        if (isNotAccessibleWay(pointTop)) pointTop = null;
+        
         
         for(Point p : curr) {
             if (pointLeft != null && p.equals(pointLeft)) pointLeft = null;
@@ -396,31 +380,26 @@ public class Maze {
         
         if (null != pointLeft && left(point)) {
             curr.add(pointLeft);
-            if (getPath(curr, best)) result = true;
-            else setNotAccessibleWay(pointLeft);
+            getPath(curr, best);
             curr.remove(currSize);
         }
         
         if (null != pointTop && top(point)) {
             curr.add(pointTop);
-            if (getPath(curr, best)) result = true;
-            else setNotAccessibleWay(pointTop);
+            getPath(curr, best);
             curr.remove(currSize);
         }
         
         if (null != pointRight && right(point)) {
             curr.add(pointRight);
-            if (getPath(curr, best)) result = true;
-            else setNotAccessibleWay(pointRight);
+            getPath(curr, best);
             curr.remove(currSize);
         }
         
         if (null != pointBot && bottom(point)) {
             curr.add(pointBot);
-            if (getPath(curr, best)) result = true;
-            else setNotAccessibleWay(pointBot);
+            getPath(curr, best);
             curr.remove(currSize);
         }
-        return result;
     }
 }
