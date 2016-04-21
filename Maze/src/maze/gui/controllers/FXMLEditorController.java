@@ -61,11 +61,6 @@ public class FXMLEditorController implements Initializable {
         fileChooser.setInitialDirectory(            //директория по умолчанию
                 new File("./src/levels")
         );
-        fileChooser.setInitialDirectory(
-                new File(System.getProperty("./src"))
-
-            );
-        
     }
     /**
      * Спрашивает пользователя, надо ли сохранить созданный лабиринт и сохраяет его
