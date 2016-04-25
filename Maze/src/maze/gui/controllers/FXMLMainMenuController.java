@@ -11,7 +11,6 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
 import maze.gui.loader.Loader;
 
 /**
@@ -39,6 +38,11 @@ public class FXMLMainMenuController implements Initializable {
     @FXML
     private void handleEditorButtonAction(ActionEvent event) throws IOException {
         Loader.getLoader().loadEditor();
+    }
+    
+    @FXML
+    private void onExit() {
+        System.exit(0);
     }
     
     @Override

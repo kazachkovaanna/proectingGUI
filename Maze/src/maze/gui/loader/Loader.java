@@ -2,10 +2,18 @@ package maze.gui.loader;
 
 import java.io.File;
 import java.io.IOException;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
+import javafx.beans.property.DoubleProperty;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import maze.gui.controllers.FXMLEditorController;
 import maze.gui.controllers.FXMLGameProcessController;
 
@@ -27,15 +35,20 @@ public class Loader {
     private Scene editor;           //Редактор уровней
     private Scene settings;         //Настройки
     private FXMLLoader fxmlLoader;  //Загрузчик
+    private final StackPane stack;
     
     public Loader(Stage stage){
         this.stage = stage;
         fxmlLoader = new FXMLLoader();
+        stack = new StackPane();
+        stage.setScene(new Scene(stack));
     }
     
     /**
      * Инициализирует экземпляр класса загрузчик
      * Загрузчик всем возвращается один и тот же
+     * @param stage
+     * @return 
     */
     public static Loader initLoader(Stage stage){
         if(loader==null){
@@ -46,13 +59,52 @@ public class Loader {
     
     /**
      * Возвращает загрузчик, с которым работают все контроллеры
+     * @return 
     */
     public static Loader getLoader(){        
         return loader;
     }
     
+    private void loadScreen(Scene scene) {
+        Parent p = scene.getRoot();
+        DoubleProperty opacity = stack.opacityProperty();
+        if(stack.getChildren().isEmpty()) {
+            stack.setOpacity(0.0); 
+            stack.getChildren().add(p);  
+            Timeline fadeIn = new Timeline( 
+             new KeyFrame(Duration.ZERO, 
+                          new KeyValue(opacity, 0.0)), 
+             new KeyFrame(new Duration(1500), 
+                          new KeyValue(opacity, 1.0))); 
+            fadeIn.play(); 
+        } else {
+            Timeline fade = new Timeline( 
+           new KeyFrame(Duration.ZERO, 
+                        new KeyValue(opacity,1.0)), 
+           new KeyFrame(new Duration(500), 
+
+               new EventHandler() { 
+                 @Override 
+                 public void handle(Event t) { 
+                   //remove displayed screen 
+                   stack.getChildren().remove(0); 
+                   //add new screen 
+                   stack.getChildren().add(0, p); 
+                   Timeline fadeIn = new Timeline( 
+                       new KeyFrame(Duration.ZERO, 
+                              new KeyValue(opacity, 0.0)), 
+                       new KeyFrame(new Duration(500), 
+                              new KeyValue(opacity, 1.0))); 
+                   fadeIn.play(); 
+                 } 
+               }, new KeyValue(opacity, 0.0))); 
+            fade.play(); 
+        }
+    }
+    
     /**
      * Загружает окно главного меню. Если такого окна еще не существует, создает его
+     * @throws java.io.IOException
      */
     public void loadMainMenu() throws IOException{   
         if(mainMenu == null){
@@ -61,11 +113,12 @@ public class Loader {
             stage.show();
             mainMenu = scene;
         }
-        stage.setScene(mainMenu);
+        loadScreen(mainMenu);
     }
     
     /**
      * Загружает окно выбора уровня. Если такого окна еще не существует, создает его
+     * @throws java.io.IOException
      */
     public void loadLevelChoice() throws IOException{
         if(levelChoice == null){
@@ -74,11 +127,13 @@ public class Loader {
             scene.setRoot(root);
             levelChoice = scene;
         }
-        stage.setScene(levelChoice);
+        loadScreen(levelChoice);
     }
     
     /**
      * Загружает окно прохождения уровня. Если такого окна еще не существует, создает его
+     * @param level
+     * @throws java.io.IOException
      */
     public void loadGameLevel(File level) throws IOException{
         if(gameLevel == null){
@@ -91,11 +146,12 @@ public class Loader {
             gameController.setScene(gameLevel); //Поэтому контроллеру после его инициализации передается ссылка на сцену
         }
         gameController.setLevel(level);
-        stage.setScene(gameLevel);
+        loadScreen(gameLevel);
     }
     
     /**
      * Загружает окно выбора игрока. Если такого окна еще не существует, создает его
+     * @throws java.io.IOException
      */
     public void loadPlayerChoice() throws IOException{
         if(playerChoice == null){
@@ -104,11 +160,12 @@ public class Loader {
             scene.setRoot(root);
             playerChoice = scene;
         }
-        stage.setScene(playerChoice);
+        loadScreen(playerChoice);
     }
     
     /**
      * Загружает окно статистики игрока. Если такого окна еще не существует, создает его
+     * @throws java.io.IOException
      */
     public void loadStatistics() throws IOException{
         if(statistics == null){
@@ -117,11 +174,12 @@ public class Loader {
             scene.setRoot(root);
             statistics = scene;
         }
-        stage.setScene(statistics);
+        loadScreen(statistics);
     }
     
     /**
      * Загружает окно редактора уровней. Если такого окна еще не существует, создает его
+     * @throws java.io.IOException
      */
     public void loadEditor() throws IOException{
         //Как и прохождение игры, для обработки нажатий на клавиши, передает контроллеру ссылку на сцену
@@ -134,11 +192,12 @@ public class Loader {
             editor = scene;
             editorController.setScene(scene);
         }
-        stage.setScene(editor);
+        loadScreen(editor);
     }
     
     /**
      * Загружает окно настроек. Если такого окна еще не существует, создает его
+     * @throws java.io.IOException
      */
     public void loadSettings() throws IOException{
         if(statistics == null){
@@ -147,14 +206,12 @@ public class Loader {
             scene.setRoot(root);
             settings = scene;
         }
-        stage.setScene(settings);
+        loadScreen(settings);
     }
     
     /**
-     * 
-     * @param mode, указывает тип окна из перечисления ...
-     * 
      * Метод изменяет свойства окна в соответствии с параметром mode
+     * @param mode, указывает тип окна из перечисления ...
      */
     public void changeStage(Integer mode) /*throws ChoiseModeException*/{
         switch (mode) {
