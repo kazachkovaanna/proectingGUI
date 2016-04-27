@@ -37,10 +37,25 @@
                <VBox.margin>
                   <Insets bottom="40.0" />
                </VBox.margin></Slider>
-            <Label alignment="CENTER_RIGHT" stylesheets="@setings.css" text="Цвета:" textAlignment="CENTER">
+            <Label alignment="CENTER_RIGHT" stylesheets="@setings.css" text="Цвет стен:" textAlignment="CENTER">
                <VBox.margin>
                   <Insets />
                </VBox.margin></Label>
+            <ColorPicker fx:id="colorPicker" onAction="#handleSetWallColor">
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin></ColorPicker>
+            <Label text="Цвет дорожек" />
+            <ColorPicker>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </ColorPicker>
+            <Label text="Цвет старта" />
+            <ColorPicker />
+            <Label text="Цвет финиша" />
+            <ColorPicker />
+            <Label text="Цвет пройденого пути" />
             <ColorPicker />
          </children></VBox>
    </center>

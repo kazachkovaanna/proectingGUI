@@ -11,8 +11,10 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ColorPicker;
+import javafx.scene.paint.Color;
 import maze.gui.loader.Loader;
-
+import statistics.User;
 /**
  * FXML Controller class
  *
@@ -20,6 +22,8 @@ import maze.gui.loader.Loader;
  */
 public class FXMLSettingsController implements Initializable {
 
+    @FXML
+    private ColorPicker colorPicker;
     /**
      * Initializes the controller class.
      */
@@ -38,4 +42,18 @@ public class FXMLSettingsController implements Initializable {
         Loader.loadMainMenu();
     }
     
+    @FXML
+    private void handleSetWallColor(ActionEvent event){
+        Color c = colorPicker.getValue();
+        System.out.println("New Color's RGB = "+c.getRed()+" "+c.getGreen()+" "+c.getBlue());
+    }
+
+    
+    /*colorPicker.setOnAction(new EventHandler() {
+        public void handle(Event t) {
+             Color c = colorPicker.getValue();
+             System.out.println("New Color's RGB = "+c.getRed()+" "+c.getGreen()+" "+c.getBlue());
+         }
+    });*/
+
 }
