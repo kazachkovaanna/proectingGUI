@@ -59,7 +59,7 @@ public class FXMLGameProcessController implements Initializable {
     }
     @FXML
     private void handleBackButtonAction(ActionEvent event) throws IOException{
-        Loader.getLoader().loadLevelChoice();
+        Loader.loadLevelChoice();
     }
     
     @FXML

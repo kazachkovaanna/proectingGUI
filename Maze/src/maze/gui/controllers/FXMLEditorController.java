@@ -12,6 +12,8 @@ import java.net.URL;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -21,6 +23,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextInputDialog;
+import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import maze.Maze;
 import maze.Point;
@@ -33,10 +36,11 @@ import maze.gui.loader.Loader;
  * @author Ann
  */
 public class FXMLEditorController implements Initializable {
-
     @FXML
-    Canvas editArea;            //Ссылка на canvas, в котором рисуется лабиринт
-    private Scene scene;        //Ссылка на сцену, для обработки нажатий
+    private Pane pane;
+    @FXML
+    private Canvas editArea;            //Ссылка на canvas, в котором рисуется лабиринт
+    private Scene scene;
     private EditHandler handler;    //Обработчик нажатий
     private Maze maze;          //Изображаемый лабиринт
     FileChooser fileChooser;    //Окно выбора файла
@@ -47,6 +51,8 @@ public class FXMLEditorController implements Initializable {
     /**
      * Инициализирует контроллер
      * Рисует новый пустой лабиринт и настраивает выбор файлов
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -61,6 +67,19 @@ public class FXMLEditorController implements Initializable {
         fileChooser.setInitialDirectory(            //директория по умолчанию
                 new File("./src/levels")
         );
+        pane.heightProperty().addListener(
+                (ObservableValue<? extends Number> observable, Number oldValue, Number newValue) -> {
+                    onResize(0, newValue.doubleValue());
+                }
+            );
+        pane.widthProperty().addListener(
+                (ObservableValue<? extends Number> observable, Number oldValue, Number newValue) -> {
+                    onResize(newValue.doubleValue(), 0);
+                }
+            );
+        
+        /// костыль!!!!! исправить!!!!!!!!!!!!!!!!!!!!!!!
+        setScene(new Scene(pane.getParent()));
     }
     /**
      * Спрашивает пользователя, надо ли сохранить созданный лабиринт и сохраяет его
@@ -85,7 +104,7 @@ public class FXMLEditorController implements Initializable {
     @FXML
     private void handleBackButtonAction(ActionEvent event) throws IOException{
         askSaving();
-        Loader.getLoader().loadMainMenu();
+        Loader.loadMainMenu();
     }
     
     /**
@@ -95,7 +114,7 @@ public class FXMLEditorController implements Initializable {
     @FXML
     private void handleSaveButtonAction(ActionEvent event){
         List<Point> solution = maze.getPath(maze.getStart());
-        if(solution == null || solution.size() == 0){
+        if(solution == null || solution.isEmpty()){
             Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Нет пути к выходу!!!");
             alert.setHeaderText("В созданном лабиринте невозможно построить путь к выходу!");
@@ -181,5 +200,9 @@ public class FXMLEditorController implements Initializable {
        
     }
     
-    
+    public void onResize(double w, double h) {
+        if (h > 0) editArea.setHeight(h);
+        if (w > 0) editArea.setWidth(w);
+        handler.redraw();
+    }
 }

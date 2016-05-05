@@ -22,15 +22,15 @@ public class FXMLPlayerChoiceController implements Initializable {
 
     @FXML
     private void handleOkButtonAction(ActionEvent event) throws IOException{
-        Loader.getLoader().loadMainMenu();
+        Loader.loadMainMenu();
     }
     @FXML
     private void handleCancelButtonAction(ActionEvent event) throws IOException{
-        Loader.getLoader().loadMainMenu();
+        Loader.loadMainMenu();
     }
     @FXML
     private void handleStatisticsButtonAction(ActionEvent event) throws IOException{
-        Loader.getLoader().loadStatistics();
+        Loader.loadStatistics();
     }
     /**
      * Initializes the controller class.

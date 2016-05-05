@@ -17,7 +17,8 @@ public class Main extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-         Loader.initLoader(stage).loadMainMenu();      
+         Loader.initLoader(stage);
+         Loader.loadMainMenu();      
        
     }
 
