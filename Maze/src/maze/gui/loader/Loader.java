@@ -2,6 +2,7 @@ package maze.gui.loader;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -16,57 +17,39 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import maze.gui.controllers.FXMLEditorController;
 import maze.gui.controllers.FXMLGameProcessController;
+import maze.gui.controllers.FXMLMainMenuController;
 
 /**
  *
  * @author Ann
  */
 public class Loader {
-    
-    private static Loader loader;   //Экзепляр класса загрузчика - с ним будут работать все окна
-    private final Stage stage;      //Окно на котором отрисовывается
-    private Scene mainMenu;         //Главное меню
-    private Scene levelChoice;      //Выбор уровня
-    private Scene gameLevel;        //Прохождение уровня
-    private FXMLGameProcessController gameController;   //Ссылка на контроллер прохождения уровней
-    private FXMLEditorController editorController;      //Ссылка на контроллер редактировани уровней
-    private Scene playerChoice;     //Выбор игрока
-    private Scene statistics;       //Статистика игрока
-    private Scene editor;           //Редактор уровней
-    private Scene settings;         //Настройки
-    private FXMLLoader fxmlLoader;  //Загрузчик
-    private final StackPane stack;
-    
-    public Loader(Stage stage){
-        this.stage = stage;
-        fxmlLoader = new FXMLLoader();
-        stack = new StackPane();
-        stage.setScene(new Scene(stack));
-    }
+    private static Stage stage;             //Окно на котором отрисовывается
+    private static Parent mainMenu;         //Главное меню
+    private static Parent levelChoice;      //Выбор уровня
+    private static Parent gameLevel;        //Прохождение уровня
+    private static FXMLGameProcessController gameController;   //Ссылка на контроллер прохождения уровней
+    private static FXMLEditorController editorController;      //Ссылка на контроллер редактировани уровней
+    private static Parent playerChoice;     //Выбор игрока
+    private static Parent statistics;       //Статистика игрока
+    private static Parent editor;           //Редактор уровней
+    private static Parent settings;         //Настройки
+    private static StackPane stack;
     
     /**
      * Инициализирует экземпляр класса загрузчик
      * Загрузчик всем возвращается один и тот же
-     * @param stage
-     * @return 
+     * @param stage 
     */
-    public static Loader initLoader(Stage stage){
-        if(loader==null){
-           loader = new Loader(stage); 
-        }
-        return loader;
+    public static void initLoader(Stage stage){
+        stack = new StackPane();
+        Loader.stage = stage;
+        Loader.stage.setFullScreen(true);
+        Loader.stage.setScene(new Scene(stack));
+        stage.show();
     }
     
-    /**
-     * Возвращает загрузчик, с которым работают все контроллеры
-     * @return 
-    */
-    public static Loader getLoader(){        
-        return loader;
-    }
-    
-    private void loadScreen(Scene scene) {
-        Parent p = scene.getRoot();
+    private static void loadScreen(Parent p) {
         DoubleProperty opacity = stack.opacityProperty();
         if(stack.getChildren().isEmpty()) {
             stack.setOpacity(0.0); 
@@ -106,12 +89,9 @@ public class Loader {
      * Загружает окно главного меню. Если такого окна еще не существует, создает его
      * @throws java.io.IOException
      */
-    public void loadMainMenu() throws IOException{   
+    public static void loadMainMenu() throws IOException{   
         if(mainMenu == null){
-            Parent root = fxmlLoader.load(getClass().getResource("mainMenu/FXMLMainMenu.fxml"));
-            Scene scene = new Scene(root);
-            stage.show();
-            mainMenu = scene;
+            mainMenu = FXMLLoader.load(Loader.class.getResource("/maze/gui/loader/mainMenu/FXMLMainMenu.fxml"));
         }
         loadScreen(mainMenu);
     }
@@ -120,12 +100,9 @@ public class Loader {
      * Загружает окно выбора уровня. Если такого окна еще не существует, создает его
      * @throws java.io.IOException
      */
-    public void loadLevelChoice() throws IOException{
+    public static void loadLevelChoice() throws IOException{
         if(levelChoice == null){
-            Parent root = fxmlLoader.load(getClass().getResource("levelChoice/FXMLLevelChoice.fxml"));        
-            Scene scene = new Scene(root);
-            scene.setRoot(root);
-            levelChoice = scene;
+            levelChoice = FXMLLoader.load(Loader.class.getResource("levelChoice/FXMLLevelChoice.fxml"));        
         }
         loadScreen(levelChoice);
     }
@@ -135,15 +112,9 @@ public class Loader {
      * @param level
      * @throws java.io.IOException
      */
-    public void loadGameLevel(File level) throws IOException{
+    public static void loadGameLevel(File level) throws IOException{
         if(gameLevel == null){
-            fxmlLoader = new FXMLLoader(getClass().getResource("gameProcess/FXMLGameProcess.fxml"));                
-            Parent root = fxmlLoader.load();
-            gameController = fxmlLoader.getController(); //Чтобы задать обработчик нажатий, контроллер должен иметь ссылку на сцену
-            Scene scene = new Scene(root);  
-            scene.setRoot(root);
-            gameLevel = scene;
-            gameController.setScene(gameLevel); //Поэтому контроллеру после его инициализации передается ссылка на сцену
+            gameLevel = FXMLLoader.load(Loader.class.getResource("gameProcess/FXMLGameProcess.fxml"));
         }
         gameController.setLevel(level);
         loadScreen(gameLevel);
@@ -153,12 +124,9 @@ public class Loader {
      * Загружает окно выбора игрока. Если такого окна еще не существует, создает его
      * @throws java.io.IOException
      */
-    public void loadPlayerChoice() throws IOException{
-        if(playerChoice == null){
-            Parent root = fxmlLoader.load(getClass().getResource("playerChoice/FXMLPlayerChoice.fxml"));        
-            Scene scene = new Scene(root);
-            scene.setRoot(root);
-            playerChoice = scene;
+    public static void loadPlayerChoice() throws IOException{
+        if(playerChoice == null){       
+            playerChoice = FXMLLoader.load(Loader.class.getResource("playerChoice/FXMLPlayerChoice.fxml"));
         }
         loadScreen(playerChoice);
     }
@@ -167,12 +135,9 @@ public class Loader {
      * Загружает окно статистики игрока. Если такого окна еще не существует, создает его
      * @throws java.io.IOException
      */
-    public void loadStatistics() throws IOException{
-        if(statistics == null){
-            Parent root = fxmlLoader.load(getClass().getResource("statistics/FXMLStatistics.fxml"));        
-            Scene scene = new Scene(root);
-            scene.setRoot(root);
-            statistics = scene;
+    public static void loadStatistics() throws IOException{
+        if(statistics == null){       
+            statistics = FXMLLoader.load(Loader.class.getResource("statistics/FXMLStatistics.fxml"));
         }
         loadScreen(statistics);
     }
@@ -181,16 +146,10 @@ public class Loader {
      * Загружает окно редактора уровней. Если такого окна еще не существует, создает его
      * @throws java.io.IOException
      */
-    public void loadEditor() throws IOException{
+    public static void loadEditor() throws IOException{
         //Как и прохождение игры, для обработки нажатий на клавиши, передает контроллеру ссылку на сцену
         if(editor == null){
-            fxmlLoader = new FXMLLoader(getClass().getResource("editor/FXMLEditor.fxml"));
-            Parent root = fxmlLoader.load();
-            editorController = fxmlLoader.getController();
-            Scene scene = new Scene(root);
-            scene.setRoot(root);
-            editor = scene;
-            editorController.setScene(scene);
+            editor = FXMLLoader.load(Loader.class.getResource("editor/FXMLEditor.fxml"));
         }
         loadScreen(editor);
     }
@@ -199,12 +158,9 @@ public class Loader {
      * Загружает окно настроек. Если такого окна еще не существует, создает его
      * @throws java.io.IOException
      */
-    public void loadSettings() throws IOException{
+    public static void loadSettings() throws IOException{
         if(statistics == null){
-            Parent root = fxmlLoader.load(getClass().getResource("settings/FXMLSettings.fxml"));        
-            Scene scene = new Scene(root);
-            scene.setRoot(root);
-            settings = scene;
+            settings = FXMLLoader.load(Loader.class.getResource("settings/FXMLSettings.fxml"));
         }
         loadScreen(settings);
     }
@@ -213,7 +169,7 @@ public class Loader {
      * Метод изменяет свойства окна в соответствии с параметром mode
      * @param mode, указывает тип окна из перечисления ...
      */
-    public void changeStage(Integer mode) /*throws ChoiseModeException*/{
+    public static void changeStage(Integer mode) /*throws ChoiseModeException*/{
         switch (mode) {
             case 0:
                 break;

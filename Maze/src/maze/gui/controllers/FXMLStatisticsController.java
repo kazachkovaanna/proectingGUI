@@ -22,7 +22,7 @@ public class FXMLStatisticsController implements Initializable {
 
     @FXML
     private void handleBackButtonAction(ActionEvent event) throws IOException{
-        Loader.getLoader().loadPlayerChoice();
+        Loader.loadPlayerChoice();
     }
     /**
      * Initializes the controller class.

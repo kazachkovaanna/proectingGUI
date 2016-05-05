@@ -72,7 +72,7 @@ public class FXMLLevelChoiceController implements Initializable {
                 public void handle(MouseEvent event) {
                     try {
                         Button selected = (Button) event.getSource();
-                        Loader.getLoader().loadGameLevel(new File("./src/levels/"+selected.getText()+".maze"));
+                        Loader.loadGameLevel(new File("./src/levels/"+selected.getText()+".maze"));
                     } catch (IOException ex) {
                     }
                 }
@@ -93,7 +93,7 @@ public class FXMLLevelChoiceController implements Initializable {
     }    
     @FXML
     private void handleBackButtonAction(ActionEvent event) throws IOException{
-        Loader.getLoader().loadMainMenu();
+        Loader.loadMainMenu();
     }
     @FXML
     private void handleLevelButtonAction(ActionEvent event) throws IOException{

@@ -22,22 +22,22 @@ public class FXMLMainMenuController implements Initializable {
     
     @FXML
     private void handleLevelButtonAction(ActionEvent event) throws IOException {
-        Loader.getLoader().loadLevelChoice();
+        Loader.loadLevelChoice();
     }
     
     @FXML
     private void handlePlayerButtonAction(ActionEvent event) throws IOException {
-        Loader.getLoader().loadPlayerChoice();
+        Loader.loadPlayerChoice();
     }
     
     @FXML
     private void handleSettingsButtonAction(ActionEvent event) throws IOException {
-        Loader.getLoader().loadSettings();
+        Loader.loadSettings();
     }
     
     @FXML
     private void handleEditorButtonAction(ActionEvent event) throws IOException {
-        Loader.getLoader().loadEditor();
+        Loader.loadEditor();
     }
     
     @FXML

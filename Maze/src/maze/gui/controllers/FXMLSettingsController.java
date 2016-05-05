@@ -30,12 +30,12 @@ public class FXMLSettingsController implements Initializable {
     
     @FXML
     private void handleOkButtonAction(ActionEvent event) throws IOException{
-        Loader.getLoader().loadMainMenu();
+        Loader.loadMainMenu();
     }
     
     @FXML
     private void handleCancelButtonAction(ActionEvent event) throws IOException{
-        Loader.getLoader().loadMainMenu();
+        Loader.loadMainMenu();
     }
     
 }
