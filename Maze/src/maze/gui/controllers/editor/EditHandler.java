@@ -22,8 +22,8 @@ public class EditHandler implements EventHandler<MouseEvent>{
     private Maze maze;
     private double canvasLX;
     private double canvasLY;
-    private final double canvasW;
-    private final double canvasH;
+    private double canvasW;
+    private double canvasH;
 
     private boolean isSaved;
     
@@ -43,8 +43,6 @@ public class EditHandler implements EventHandler<MouseEvent>{
         drawer = new DrawMazeImpl();
         canvasLX = canvas.getLayoutX();
         canvasLY = canvas.getLayoutY();
-        canvasH = canvas.getHeight();
-        canvasW = canvas.getWidth();
         isSaved = true;
     }
     
@@ -60,6 +58,8 @@ public class EditHandler implements EventHandler<MouseEvent>{
     public void handle(MouseEvent event) {
         double eventX = event.getX();
         double eventY = event.getY();
+        canvasH = canvas.getHeight();
+        canvasW = canvas.getWidth();
         
         canvasLX = canvas.getLayoutX();
         canvasLY = canvas.getLayoutY();

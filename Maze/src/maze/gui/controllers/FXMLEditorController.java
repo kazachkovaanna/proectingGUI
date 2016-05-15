@@ -77,9 +77,10 @@ public class FXMLEditorController implements Initializable {
                     onResize(newValue.doubleValue(), 0);
                 }
             );
-        
+        handler = new EditHandler(this, editArea,maze);
+        editArea.setOnMouseClicked(handler);
         /// костыль!!!!! исправить!!!!!!!!!!!!!!!!!!!!!!!
-        setScene(new Scene(pane.getParent()));
+       // setScene(new Scene(pane.getParent()));
     }
     /**
      * Спрашивает пользователя, надо ли сохранить созданный лабиринт и сохраяет его
@@ -195,8 +196,8 @@ public class FXMLEditorController implements Initializable {
      */
     public void setScene(Scene sc){
         scene = sc;
-        handler = new EditHandler(this, editArea,maze);
-        scene.setOnMouseClicked(handler);
+        
+       // scene.setOnMouseClicked(handler);
        
     }
     

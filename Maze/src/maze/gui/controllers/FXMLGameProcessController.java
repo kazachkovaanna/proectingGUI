@@ -10,21 +10,20 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javafx.application.Platform;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
-import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import maze.Maze;
-import maze.gui.controllers.editor.DrawMaze;
-import maze.gui.controllers.editor.DrawMazeImpl;
 import maze.gui.controllers.gamehandler.GameHandler;
 import maze.gui.loader.Loader;
 
@@ -38,6 +37,8 @@ public class FXMLGameProcessController implements Initializable {
     private boolean pause;      //true РµСЃР»Рё РёРіСЂР° РЅР° РїР°СѓР·Рµ
     private boolean finish;
     private Scene scene;
+    @FXML
+    private Pane pane;
     @FXML
     private VBox pauseBox;
     @FXML
@@ -56,6 +57,20 @@ public class FXMLGameProcessController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         unPause();
+        handler = new GameHandler(this, canvas, maze);
+        canvas.setOnKeyPressed(handler);
+        canvas.setFocusTraversable(true);
+       
+//        pane.heightProperty().addListener(
+//                (ObservableValue<? extends Number> observable, Number oldValue, Number newValue) -> {
+//                    onResize(0, newValue.doubleValue());
+//                }
+//            );
+//        pane.widthProperty().addListener(
+//                (ObservableValue<? extends Number> observable, Number oldValue, Number newValue) -> {
+//                    onResize(newValue.doubleValue(), 0);
+//                }
+//            );
     }
     @FXML
     private void handleBackButtonAction(ActionEvent event) throws IOException{
@@ -76,8 +91,7 @@ public class FXMLGameProcessController implements Initializable {
     
     public void setScene(Scene sc){
         scene = sc;
-        handler = new GameHandler(this, canvas, maze);
-        scene.setOnKeyPressed(handler);
+       // scene.setOnKeyPressed(handler);
     }
     
     public void setLevel(File level){
@@ -87,7 +101,7 @@ public class FXMLGameProcessController implements Initializable {
             finish = false;
             unPause();
             hint.setDisable(false);
-        play.setDisable(false);
+            play.setDisable(false);
         } catch (IOException ex) {
         }
     }
@@ -122,5 +136,9 @@ public class FXMLGameProcessController implements Initializable {
     public boolean isPause(){
         return pause;
     }
-    
+    public void onResize(double w, double h) {
+        if (h > 0) canvas.setHeight(h);
+        if (w > 0) canvas.setWidth(w);
+        handler.redraw();
+    }
 }

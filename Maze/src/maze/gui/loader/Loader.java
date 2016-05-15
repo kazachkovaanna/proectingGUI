@@ -10,8 +10,10 @@ import javafx.beans.property.DoubleProperty;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -35,7 +37,7 @@ public class Loader {
     private static Parent editor;           //Редактор уровней
     private static Parent settings;         //Настройки
     private static StackPane stack;
-    
+    private static FXMLLoader FXMLLoader;
     /**
      * Инициализирует экземпляр класса загрузчик
      * Загрузчик всем возвращается один и тот же
@@ -46,7 +48,10 @@ public class Loader {
         Loader.stage = stage;
         Loader.stage.setFullScreen(true);
         Loader.stage.setScene(new Scene(stack));
+        //stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
         stage.show();
+        FXMLLoader = new FXMLLoader();
+        FXMLLoader.setBuilderFactory(new JavaFXBuilderFactory());
     }
     
     private static void loadScreen(Parent p) {
@@ -90,8 +95,7 @@ public class Loader {
      * @throws java.io.IOException
      */
     public static void loadMainMenu() throws IOException{   
-        if(mainMenu == null){
-            mainMenu = FXMLLoader.load(Loader.class.getResource("/maze/gui/loader/mainMenu/FXMLMainMenu.fxml"));
+        if(mainMenu == null){ mainMenu = FXMLLoader.load(Loader.class.getResource("/maze/gui/loader/mainMenu/FXMLMainMenu.fxml"));
         }
         loadScreen(mainMenu);
     }
@@ -114,7 +118,8 @@ public class Loader {
      */
     public static void loadGameLevel(File level) throws IOException{
         if(gameLevel == null){
-            gameLevel = FXMLLoader.load(Loader.class.getResource("gameProcess/FXMLGameProcess.fxml"));
+            gameLevel = FXMLLoader.load(Loader.class.getResource("gameProcess/FXMLGameProcess.fxml").openStream());            
+            gameController = FXMLLoader.getController();
         }
         gameController.setLevel(level);
         loadScreen(gameLevel);
@@ -136,7 +141,7 @@ public class Loader {
      * @throws java.io.IOException
      */
     public static void loadStatistics() throws IOException{
-        if(statistics == null){       
+        if(statistics == null){   
             statistics = FXMLLoader.load(Loader.class.getResource("statistics/FXMLStatistics.fxml"));
         }
         loadScreen(statistics);

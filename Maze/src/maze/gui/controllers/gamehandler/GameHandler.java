@@ -48,12 +48,15 @@ public class GameHandler implements EventHandler<KeyEvent>{
         String code = event.getCode().toString();
         switch(code){
             case "ESCAPE":
-               if(controller.isPause()){
-                controller.unPause();
+                if(!controller.isFinish()){
+                    if(controller.isPause()){
+                     controller.unPause();
+                     }
+                     else{
+                         controller.pause();
+                     }
                 }
-                else{
-                    controller.pause();
-                }
+                else return;
                break;
             case "DOWN":
                 if(!controller.isPause())
@@ -88,6 +91,7 @@ public class GameHandler implements EventHandler<KeyEvent>{
                     }
                 break;
         }
+        
         index = solHasMan();
         if(index != -1)solution = solution.subList(index, solution.size());
         else solution = maze.getPath(man);
