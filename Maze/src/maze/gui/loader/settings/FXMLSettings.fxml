@@ -24,39 +24,35 @@
    <center>
       <VBox alignment="TOP_CENTER" minHeight="600.0" minWidth="1024.0" stylesheets="@setings.css">
          <children>
-            <Label text="Выберите язык:">
-               <VBox.margin>
-                  <Insets top="100.0" />
-               </VBox.margin></Label>
-            <ComboBox prefWidth="150.0">
-               <VBox.margin>
-                  <Insets bottom="40.0" />
-               </VBox.margin></ComboBox>
-            <Label text="Звук:" />
-            <Slider>
-               <VBox.margin>
-                  <Insets bottom="40.0" />
-               </VBox.margin></Slider>
             <Label alignment="CENTER_RIGHT" stylesheets="@setings.css" text="Цвет стен:" textAlignment="CENTER">
                <VBox.margin>
                   <Insets />
                </VBox.margin></Label>
-            <ColorPicker fx:id="colorPicker" onAction="#handleSetWallColor">
+            <ColorPicker fx:id="walls" onAction="#handleSetWallColor">
                <VBox.margin>
                   <Insets top="10.0" />
                </VBox.margin></ColorPicker>
             <Label text="Цвет дорожек" />
-            <ColorPicker>
+            <ColorPicker fx:id="travel">
                <VBox.margin>
                   <Insets top="10.0" />
                </VBox.margin>
             </ColorPicker>
             <Label text="Цвет старта" />
-            <ColorPicker />
+            <ColorPicker fx:id="start" />
             <Label text="Цвет финиша" />
-            <ColorPicker />
+            <ColorPicker fx:id="finish" />
             <Label text="Цвет пройденого пути" />
-            <ColorPicker />
-         </children></VBox>
+            <ColorPicker fx:id="hasTravelled" />
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+         <padding>
+            <Insets top="80.0" />
+         </padding></VBox>
    </center>
 </BorderPane>
