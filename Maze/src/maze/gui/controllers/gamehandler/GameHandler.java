@@ -146,6 +146,7 @@ public class GameHandler implements EventHandler<KeyEvent>{
      */
     public void redraw(){
         drawer.Draw2D(canvas, maze, false);
+        drawer.DrawMan(canvas,  man,man, maze);
     }
     
     public void drawHint(){

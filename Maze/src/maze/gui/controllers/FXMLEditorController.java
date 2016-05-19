@@ -79,8 +79,6 @@ public class FXMLEditorController implements Initializable {
             );
         handler = new EditHandler(this, editArea,maze);
         editArea.setOnMouseClicked(handler);
-        /// костыль!!!!! исправить!!!!!!!!!!!!!!!!!!!!!!!
-       // setScene(new Scene(pane.getParent()));
     }
     /**
      * Спрашивает пользователя, надо ли сохранить созданный лабиринт и сохраяет его

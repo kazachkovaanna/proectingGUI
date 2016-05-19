@@ -60,17 +60,16 @@ public class FXMLGameProcessController implements Initializable {
         handler = new GameHandler(this, canvas, maze);
         canvas.setOnKeyPressed(handler);
         canvas.setFocusTraversable(true);
-       
-//        pane.heightProperty().addListener(
-//                (ObservableValue<? extends Number> observable, Number oldValue, Number newValue) -> {
-//                    onResize(0, newValue.doubleValue());
-//                }
-//            );
-//        pane.widthProperty().addListener(
-//                (ObservableValue<? extends Number> observable, Number oldValue, Number newValue) -> {
-//                    onResize(newValue.doubleValue(), 0);
-//                }
-//            );
+        pane.heightProperty().addListener(
+                (ObservableValue<? extends Number> observable, Number oldValue, Number newValue) -> {
+                    onResize(0, newValue.doubleValue());
+                }
+            );
+        pane.widthProperty().addListener(
+                (ObservableValue<? extends Number> observable, Number oldValue, Number newValue) -> {
+                    onResize(newValue.doubleValue(), 0);
+                }
+            );
     }
     @FXML
     private void handleBackButtonAction(ActionEvent event) throws IOException{
