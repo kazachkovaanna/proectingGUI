@@ -7,6 +7,7 @@ import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import maze.Maze;
 import maze.Point;
+import statistics.User;
 
 /**
  *
@@ -29,8 +30,8 @@ public class DrawMazeImpl implements DrawMaze{
             for(int j = 0; j<maze.getHight(); j++){
                 p.setX(i);
                 p.setY(j);
-                if(maze.isEmpty(p)) gc.setFill(Color.BEIGE);
-                else gc.setFill(Color.DARKRED);
+                if(maze.isEmpty(p)) gc.setFill(User.getUserTravelColor());
+                else gc.setFill(User.getUserWallColor());
                 gc.fillRect(width*i, height*j, width, height);  //рисует залитый цветом квадрат
                 if(border){
                     gc.setFill(Color.BLACK);
@@ -39,9 +40,9 @@ public class DrawMazeImpl implements DrawMaze{
                 }
             }
         }
-        gc.setFill(Color.BLUEVIOLET);
+        gc.setFill(User.getUserFinishColor());
         gc.fillRect(width*maze.getFinishX(), height*maze.getFinishY(), width, height);
-        gc.setFill(Color.GREENYELLOW);
+        gc.setFill(User.getUserStartColor());
         gc.fillRect(width*maze.getStartX(), height*maze.getStartY(), width, height);
         if(border){
             gc.setFill(Color.BLACK);
@@ -62,12 +63,12 @@ public class DrawMazeImpl implements DrawMaze{
         double height = fieldH/maze.getHight();
         double width = fieldW/maze.getWeight();
         GraphicsContext gc = field.getGraphicsContext2D();
-        gc.setFill(Color.DARKSALMON);
+        gc.setFill(User.getUserDistanceTravelColor());
         Point p;
         if(sol!=null && sol.size() >= steps){
             if(sol.size() == steps) steps--;
             for(int i = 0; i<steps; i++){
-                gc.setFill(Color.DARKSALMON);
+                gc.setFill(User.getUserDistanceTravelColor());
                 p = sol.get(i);
                 gc.fillRect(p.getX()*width, p.getY()*height, width, height);
                 if(border){
@@ -90,9 +91,9 @@ public class DrawMazeImpl implements DrawMaze{
         double width = fieldW/maze.getWeight();
         GraphicsContext gc = field.getGraphicsContext2D();
         if(from.equals(maze.getStart()))
-            gc.setFill(Color.GREENYELLOW);
+            gc.setFill(User.getUserStartColor());
         else
-            gc.setFill(Color.BEIGE);
+            gc.setFill(User.getUserTravelColor());
         gc.fillRect(from.getX()*width, from.getY()*height, width, height);
         Image man = new Image("/man.png");
         gc.drawImage(man, to.getX()*width, to.getY()*height, Double.min(width, height), Double.min(width, height));

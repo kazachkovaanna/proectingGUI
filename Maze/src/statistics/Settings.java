@@ -25,11 +25,11 @@ public class Settings {
      * Конструктор поумолчанию. Инициализирует все поля значением null.
      */
     public Settings() {
-        this.wallColor = null;
-        this.travelColor = null;
-        this.startColor = null;
-        this.finishColor = null;
-        this.distanceTravelColor = null;
+        this.wallColor = Color.DARKRED;
+        this.travelColor = Color.BEIGE;
+        this.startColor = Color.GREENYELLOW;
+        this.finishColor = Color.BLUEVIOLET;
+        this.distanceTravelColor = Color.DARKSALMON;
     }
     
     /**

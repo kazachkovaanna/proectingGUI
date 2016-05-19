@@ -10,7 +10,12 @@
    <bottom>
       <HBox alignment="TOP_RIGHT" prefHeight="24.0" prefWidth="492.0" BorderPane.alignment="TOP_RIGHT">
          <children>
-            <Button mnemonicParsing="false" text="Статистика" onAction="#handleStatisticsButtonAction">
+            <Button fx:id="newPlayer" mnemonicParsing="false" onAction="#handleNewPlayer" text="Новый игрок">
+               <HBox.margin>
+                  <Insets right="20.0" />
+               </HBox.margin>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#handleStatisticsButtonAction" text="Статистика">
                <HBox.margin>
                   <Insets right="20.0" />
                </HBox.margin>
@@ -28,7 +33,7 @@
       </HBox>
    </bottom>
    <center>
-      <ListView editable="true" opacity="0.5" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <ListView fx:id="list" editable="true" opacity="0.5" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <BorderPane.margin>
             <Insets bottom="30.0" left="50.0" right="50.0" top="30.0" />
          </BorderPane.margin>
