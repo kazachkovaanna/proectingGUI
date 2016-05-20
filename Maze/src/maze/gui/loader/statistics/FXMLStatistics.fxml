@@ -6,8 +6,21 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" minHeight="600.0" minWidth="1024.0" stylesheets="@statistics.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="maze.gui.controllers.FXMLStatisticsController">
-   <children>
-      <Button layoutX="58.0" layoutY="33.0" mnemonicParsing="false" onAction="#handleBackButtonAction" text="Назад" AnchorPane.leftAnchor="28.0" AnchorPane.topAnchor="20.0" />
-   </children>
-</AnchorPane>
+
+<BorderPane prefHeight="200.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="maze.gui.controllers.FXMLStatisticsController">
+   <top>
+      <Button mnemonicParsing="false" onAction="#handleBackButtonAction" text="Назад" BorderPane.alignment="CENTER" />
+   </top>
+   <center>
+      <TableView prefHeight="203.0" prefWidth="149.0" BorderPane.alignment="CENTER">
+        <columns>
+          <TableColumn prefWidth="75.0" text="Уровень" />
+          <TableColumn prefWidth="75.0" text="Шаги" />
+            <TableColumn prefWidth="75.0" text="Подсказки" />
+        </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
+   </center>
+</BorderPane>

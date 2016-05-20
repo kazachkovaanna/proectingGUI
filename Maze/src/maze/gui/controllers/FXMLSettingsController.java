@@ -58,6 +58,7 @@ public class FXMLSettingsController implements Initializable {
         c = hasTravelled.getValue();
         User.setUserDistanceTravelColor(c);
         Loader.loadMainMenu();
+        User.write();
     }
     
     @FXML

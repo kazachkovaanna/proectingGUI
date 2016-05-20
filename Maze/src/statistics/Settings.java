@@ -71,31 +71,31 @@ public class Settings {
         String value;
         int c = 0;
         while(c >= 0) {
-            for(c = in.read(); c != '=' && c >= 0;)
+            for(c = in.read(); c != '=' && c >= 0; c = in.read())
                 if (c < 0 ) throw new IOException();
                 else sb.append((char)c);
             key = sb.toString();
             sb.delete(0, sb.length());
             
-            for(c = in.read(); c != '\n' && c >= 0;)
+            for(c = in.read(); c != '\n' && c >= 0; c = in.read())
                 sb.append((char)c);
             value = sb.toString();
             sb.delete(0, sb.length());
             
             switch(key) {
-                case "wallColor=":
+                case "wallColor":
                     wallColor = Color.valueOf(value);
                     break;
-                case "travelColor=":
+                case "travelColor":
                     travelColor = Color.valueOf(value);
                     break;
-                case "startColor=":
+                case "startColor":
                     startColor = Color.valueOf(value);
                     break;
-                case "finishColor=":
+                case "finishColor":
                     finishColor = Color.valueOf(value);
                     break;
-                case "distanceTravelColor=":
+                case "distanceTravelColor":
                     distanceTravelColor = Color.valueOf(value);
                     break;
             }

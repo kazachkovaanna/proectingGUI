@@ -40,6 +40,7 @@ public class FXMLPlayerChoiceController implements Initializable {
         if(name != null){
             File f = new File("./src/users/"+name);
             User.get(f);
+            
         }
         Loader.loadMainMenu();
     }
