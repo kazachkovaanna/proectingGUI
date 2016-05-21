@@ -17,27 +17,20 @@ import javafx.scene.paint.Color;
  */
 public class User {
     private static String userName;
-    private static ArrayList<Statistics> userStatistics = new ArrayList<Statistics>();
+    private static ArrayList<Statistics> userStatistics = new ArrayList<>();
     private static Settings userSettings = new Settings();
     private static OutputStreamStatistics out;
     private static InputStraemStatistics in;
-    
-    
-    /**
-     * Конструктор по умолчанию. 
-     */    
-    public User(){
-        this.userName = null;
-    }
     
     public static void setUser(String name, ArrayList<Statistics> statistics, Settings settings){
         userName = name;
         userStatistics = statistics;
         userSettings = settings;
     }
+    
     public static void newUser(String name) throws FileNotFoundException{
         userName = name;
-        userStatistics = new ArrayList<Statistics>();
+        userStatistics = new ArrayList<>();
         userSettings = new Settings();
         userSettings.setWallColor(Color.DARKRED);
         userSettings.setTravelColor(Color.BEIGE);
@@ -73,10 +66,6 @@ public class User {
     public static ArrayList<Statistics> getUserStatistics(){
         return userStatistics;
     }
- //   public Statistics getStatsticsByName(String name){
-   //     if (userName.equals(name))
-     //   return Statistics;
-    //}
     
     /**
      * @return настройки игрока

@@ -2,7 +2,6 @@ package maze.gui.loader;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -10,16 +9,13 @@ import javafx.beans.property.DoubleProperty;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import maze.gui.controllers.FXMLEditorController;
 import maze.gui.controllers.FXMLGameProcessController;
-import maze.gui.controllers.FXMLMainMenuController;
 
 /**
  *
@@ -31,7 +27,6 @@ public class Loader {
     private static Parent levelChoice;      //Выбор уровня
     private static Parent gameLevel;        //Прохождение уровня
     private static FXMLGameProcessController gameController;   //Ссылка на контроллер прохождения уровней
-    private static FXMLEditorController editorController;      //Ссылка на контроллер редактировани уровней
     private static Parent playerChoice;     //Выбор игрока
     private static Parent statistics;       //Статистика игрока
     private static Parent editor;           //Редактор уровней
@@ -48,10 +43,8 @@ public class Loader {
         Loader.stage = stage;
         Loader.stage.setFullScreen(true);
         Loader.stage.setScene(new Scene(stack));
-        //stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
+        stage.setFullScreenExitKeyCombination(KeyCombination.keyCombination("F12"));
         stage.show();
-        FXMLLoader = new FXMLLoader();
-        FXMLLoader.setBuilderFactory(new JavaFXBuilderFactory());
     }
     
     private static void loadScreen(Parent p) {
@@ -95,7 +88,8 @@ public class Loader {
      * @throws java.io.IOException
      */
     public static void loadMainMenu() throws IOException{   
-        if(mainMenu == null){ mainMenu = FXMLLoader.load(Loader.class.getResource("/maze/gui/loader/mainMenu/FXMLMainMenu.fxml"));
+        if(mainMenu == null) { 
+            mainMenu = new FXMLLoader(Loader.class.getResource("/maze/gui/loader/mainMenu/FXMLMainMenu.fxml")).load();
         }
         loadScreen(mainMenu);
     }
@@ -106,7 +100,7 @@ public class Loader {
      */
     public static void loadLevelChoice() throws IOException{
         if(levelChoice == null){
-            levelChoice = FXMLLoader.load(Loader.class.getResource("levelChoice/FXMLLevelChoice.fxml"));        
+            levelChoice = new FXMLLoader(Loader.class.getResource("levelChoice/FXMLLevelChoice.fxml")).load();        
         }
         loadScreen(levelChoice);
     }
@@ -118,7 +112,8 @@ public class Loader {
      */
     public static void loadGameLevel(File level) throws IOException{
         if(gameLevel == null){
-            gameLevel = FXMLLoader.load(Loader.class.getResource("gameProcess/FXMLGameProcess.fxml").openStream());            
+            FXMLLoader = new FXMLLoader(Loader.class.getResource("gameProcess/FXMLGameProcess.fxml"));
+            gameLevel = FXMLLoader.load();            
             gameController = FXMLLoader.getController();
         }
         gameController.setLevel(level);
@@ -131,7 +126,7 @@ public class Loader {
      */
     public static void loadPlayerChoice() throws IOException{
         if(playerChoice == null){       
-            playerChoice = FXMLLoader.load(Loader.class.getResource("playerChoice/FXMLPlayerChoice.fxml"));
+            playerChoice = new FXMLLoader(Loader.class.getResource("playerChoice/FXMLPlayerChoice.fxml")).load();
         }
         loadScreen(playerChoice);
     }
@@ -142,7 +137,7 @@ public class Loader {
      */
     public static void loadStatistics() throws IOException{
         if(statistics == null){   
-            statistics = FXMLLoader.load(Loader.class.getResource("statistics/FXMLStatistics.fxml"));
+            statistics = new FXMLLoader(Loader.class.getResource("statistics/FXMLStatistics.fxml")).load();
         }
         loadScreen(statistics);
     }
@@ -154,7 +149,7 @@ public class Loader {
     public static void loadEditor() throws IOException{
         //Как и прохождение игры, для обработки нажатий на клавиши, передает контроллеру ссылку на сцену
         if(editor == null){
-            editor = FXMLLoader.load(Loader.class.getResource("editor/FXMLEditor.fxml"));
+            editor = new FXMLLoader(Loader.class.getResource("editor/FXMLEditor.fxml")).load();
         }
         loadScreen(editor);
     }
@@ -165,7 +160,7 @@ public class Loader {
      */
     public static void loadSettings() throws IOException{
         if(statistics == null){
-            settings = FXMLLoader.load(Loader.class.getResource("settings/FXMLSettings.fxml"));
+            settings = new FXMLLoader(Loader.class.getResource("settings/FXMLSettings.fxml")).load();
         }
         loadScreen(settings);
     }

@@ -7,16 +7,34 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" minHeight="600.0" minWidth="1024.0" stylesheets="@levelChoice.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="maze.gui.controllers.FXMLLevelChoiceController">
-   <children>
-      <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleBackButtonAction" text="Назад" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="18.0" />
+<BorderPane prefHeight="200.0" prefWidth="200.0" styleClass="main" stylesheets="@levelChoice.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="maze.gui.controllers.FXMLLevelChoiceController">
+   <top>
+      <HBox>
+         <children>
+            <Button mnemonicParsing="false" onAction="#handleBackButtonAction" text="Назад">
+               <HBox.margin>
+                  <Insets left="5.0" top="5.0" />
+               </HBox.margin>
+            </Button>
+            <HBox alignment="CENTER" HBox.hgrow="ALWAYS">
+               <children>
+            
+                                          <Label alignment="CENTER" contentDisplay="CENTER" text="Выберите уровень:" HBox.hgrow="ALWAYS">
+                     <HBox.margin>
+                        <Insets top="5.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
+         </children>
+      </HBox>
+   </top>
+   <center>
 
-      <GridPane fx:id="gridPane" alignment="CENTER" layoutX="6.0" layoutY="100.0" prefHeight="467.0" prefWidth="1011.0">
+            <GridPane fx:id="gridPane" alignment="CENTER" prefHeight="467.0" prefWidth="1011.0" BorderPane.alignment="CENTER">
          <rowConstraints>
             <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
          </rowConstraints>
       </GridPane>
-
-      <Label layoutX="244.0" layoutY="23.0" text="Выберите уровень:" />
-   </children>
-</AnchorPane>
+   </center>
+</BorderPane>

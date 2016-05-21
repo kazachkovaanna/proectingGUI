@@ -19,7 +19,6 @@ public class Main extends Application {
     public void start(Stage stage) throws Exception {
          Loader.initLoader(stage);
          Loader.loadMainMenu();      
-       
     }
 
     /**

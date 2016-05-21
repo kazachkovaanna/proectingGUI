@@ -95,7 +95,7 @@ public class DrawMazeImpl implements DrawMaze{
         else
             gc.setFill(User.getUserTravelColor());
         gc.fillRect(from.getX()*width, from.getY()*height, width, height);
-        Image man = new Image("/man.png");
+        Image man = new Image(DrawMazeImpl.class.getResource("man.png").toString());
         gc.drawImage(man, to.getX()*width, to.getY()*height, Double.min(width, height), Double.min(width, height));
     }
     

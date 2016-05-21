@@ -7,12 +7,16 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane minHeight="600.0" minWidth="1024.0" stylesheets="@gameProcess.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="maze.gui.controllers.FXMLGameProcessController">
-   <children>
-      <Pane fx:id="pane">
+<BorderPane prefHeight="200.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="maze.gui.controllers.FXMLGameProcessController">
+   <center>
+      <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Canvas fx:id="canvas" height="600.0" layoutY="-14.0" width="1024.0" />
-            <VBox id="pauseBox" fx:id="pauseBox" alignment="CENTER" layoutX="412.0" layoutY="164.0" prefHeight="200.0" prefWidth="200.0" styleClass="pauseBox" stylesheets="@gameProcess.css">
+            <Pane fx:id="pane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" StackPane.alignment="CENTER">
+               <children>
+                  <Canvas fx:id="canvas" height="600.0" width="1024.0" />
+               </children>
+            </Pane>
+            <VBox id="pauseBox" fx:id="pauseBox" alignment="CENTER" prefHeight="200.0" prefWidth="200.0" stylesheets="@gameProcess.css">
                <children>
                   <Label id="label" minHeight="-Infinity" minWidth="-Infinity" text="Пауза">
                      <VBox.margin>
@@ -40,6 +44,6 @@
                </opaqueInsets>
             </VBox>
          </children>
-      </Pane>
-   </children>
-</AnchorPane>
+      </StackPane>
+   </center>
+</BorderPane>
