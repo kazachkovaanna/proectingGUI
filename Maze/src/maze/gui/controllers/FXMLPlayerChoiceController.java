@@ -80,6 +80,7 @@ public class FXMLPlayerChoiceController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         File usersDir = new File ("./src/users");
+        usersDir.mkdir();
         File [] users = usersDir.listFiles();
         items =FXCollections.observableArrayList();
         for(File f : users){
