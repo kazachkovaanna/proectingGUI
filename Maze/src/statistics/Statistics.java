@@ -6,6 +6,10 @@
 package statistics;
 
 import java.io.IOException;
+import javafx.beans.property.LongProperty;
+import javafx.beans.property.SimpleLongProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 
 /**
  *
@@ -157,4 +161,18 @@ public class Statistics {
     public void setStep(Long step) {
         this.step = step;
     }
+    
+    public StringProperty levelNameProperty(){
+        return new SimpleStringProperty(levelName);
+    }
+    public LongProperty stepProperty(){
+        return new SimpleLongProperty(step);
+    }
+    public LongProperty helpAmountProperty(){
+        return new SimpleLongProperty(helpAmount);
+    }
+    public LongProperty timeProperty(){
+        return new SimpleLongProperty(time);
+    }
+    
 }

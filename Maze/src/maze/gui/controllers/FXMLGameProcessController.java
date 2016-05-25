@@ -23,7 +23,7 @@ import javafx.scene.layout.VBox;
 import maze.Maze;
 import maze.gui.controllers.gamehandler.GameHandler;
 import maze.gui.loader.Loader;
-
+import statistics.User;
 /**
  * FXML Controller class
  *
@@ -47,6 +47,9 @@ public class FXMLGameProcessController implements Initializable {
     private Button hint;
     private GameHandler handler;
     private Maze maze;
+    private long timeStart;
+    private long timeOffset;
+    private String levelName;
     
     /**
      * Initializes the controller class.
@@ -59,6 +62,7 @@ public class FXMLGameProcessController implements Initializable {
         handler = new GameHandler(this, canvas, maze);
         canvas.setOnKeyPressed(handler);
         canvas.setFocusTraversable(true);
+        timeStart = timeOffset = 0;
         pane.heightProperty().addListener(
                 (ObservableValue<? extends Number> observable, Number oldValue, Number newValue) -> {
                     onResize(0, newValue.doubleValue());
@@ -69,6 +73,7 @@ public class FXMLGameProcessController implements Initializable {
                     onResize(newValue.doubleValue(), 0);
                 }
             );
+        
     }
     @FXML
     private void handleBackButtonAction(ActionEvent event) throws IOException{
@@ -95,20 +100,23 @@ public class FXMLGameProcessController implements Initializable {
             unPause();
             hint.setDisable(false);
             play.setDisable(false);
+            levelName = level.getName();
+            levelName.replace(".maze", "");
         } catch (IOException ex) {
         }
     }
     
     public void finish(){
+        pause();
         finish = true;
         hint.setDisable(true);
         play.setDisable(true);
-        pause();
         Alert dialog = new Alert(AlertType.INFORMATION);
         dialog.setTitle("Уровень пройден!");
         dialog.setHeaderText("Уровень пройден!");
         dialog.setContentText("Число шагов: "+ handler.getSteps() + "\nЧисло подсказок: "+handler.getHints());
         dialog.showAndWait();
+        User.addStatistics(levelName, timeStart, handler.getSteps(), handler.getHints());
     }
     
     public boolean isFinish(){
@@ -118,12 +126,13 @@ public class FXMLGameProcessController implements Initializable {
     public void pause(){
         pause = true;
         pauseBox.setVisible(pause);
-        
+        timeOffset += System.currentTimeMillis() - timeStart;
     }
     
     public void unPause(){
         pause = false;
         pauseBox.setVisible(pause);
+        timeStart=System.currentTimeMillis();
     }
     
     public boolean isPause(){

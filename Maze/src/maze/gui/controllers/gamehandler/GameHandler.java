@@ -30,8 +30,8 @@ public class GameHandler implements EventHandler<KeyEvent>{
     private DrawMaze drawer;
     private Point man;
     private List<Point> solution;
-    private int steps;
-    private int hints;
+    private long steps;
+    private long hints;
     private int index;
     
     
@@ -134,10 +134,10 @@ public class GameHandler implements EventHandler<KeyEvent>{
             hints++;
         }
     }
-    public int getHints(){
+    public long getHints(){
         return hints;
     }
-    public int getSteps(){
+    public long getSteps(){
         return steps;
     }
     

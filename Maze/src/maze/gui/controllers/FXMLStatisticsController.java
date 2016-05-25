@@ -5,20 +5,21 @@
  */
 package maze.gui.controllers;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.collections.FXCollections;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import maze.gui.loader.Loader;
+import statistics.Statistics;
+import statistics.User;
 
 /**
  * FXML Controller class
@@ -29,9 +30,18 @@ public class FXMLStatisticsController implements Initializable {
 
     @FXML
     private Label info;
+    private ObservableList<Statistics> data;
     @FXML
-    private ChoiceBox level;
-    private ObservableList<String> items;
+    private TableView table;
+    @FXML
+    private TableColumn<Statistics, String> level;
+    @FXML
+    private TableColumn<Statistics, Number> time;
+    @FXML
+    private TableColumn<Statistics, Number> steps;
+    @FXML
+    private TableColumn<Statistics, Number> hints;
+    
     @FXML
     private void handleBackButtonAction(ActionEvent event) throws IOException{
         Loader.loadPlayerChoice();
@@ -41,16 +51,11 @@ public class FXMLStatisticsController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        File levelsDir = new File ("./src/levels");
-        File [] users = levelsDir.listFiles();
-        items =FXCollections.observableArrayList();
-        for(File f : users){
-            items.add(f.getName());
-        }
-        level.setItems(items);
-        level.setOnAction((Event event) -> {
-            
-        });
+        level.setCellValueFactory(cellData ->  cellData.getValue().levelNameProperty());
+        time.setCellValueFactory(cellData -> cellData.getValue().timeProperty());
+        steps.setCellValueFactory(cellData -> cellData.getValue().stepProperty());
+        hints.setCellValueFactory(cellData -> cellData.getValue().helpAmountProperty());
+        table.setItems(User.data);
     }    
     
 }

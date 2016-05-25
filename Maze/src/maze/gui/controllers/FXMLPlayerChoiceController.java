@@ -39,6 +39,7 @@ public class FXMLPlayerChoiceController implements Initializable {
         String name = (String) list.getSelectionModel().getSelectedItems().get(0);
         if(name != null){
             File f = new File("./src/users/"+name);
+            if(User.getUserName()!= null) User.write();
             User.get(f);
             
         }
